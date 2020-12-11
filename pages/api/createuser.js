@@ -11,6 +11,7 @@ export default async (req, res) => {
     db.collection("users")
       .insert({username: user, password: pw, email: email, interests: interests, 
         followedOrgs: [], followedPosts: [], locations: locations});
+      console.log("test route");
       res.status(200).json({success: true});
 
   };
