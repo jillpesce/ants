@@ -1,36 +1,103 @@
-import Head from 'next/head'
+import { UserContext } from '../contexts/user-context'
+import { useContext, useEffect, useState } from 'react'
+import isEmpty from 'lodash/isEmpty'
 
 export default function Signup() {
-  return (
-    <div>
-        <h1>Sign Up</h1>
-        <a href="/login">Have an account? Log in here.</a>
+    const { user, login } = useContext(UserContext)
+    const [username, setUsername] = useState()
+    const [password, setPassword] = useState()
+    const [name, setName] = useState()
+    const [err, setErr] = useState()
 
-        <h4>For users:</h4>
-        <form>
-            <label>Username:</label>
-            <input type="text"></input><br></br>
-            <label>Password:</label>
-            <input type="text"></input><br></br>
-            <label>Email:</label>
-            <input type="text"></input><br></br>
-            <label>Location:</label>
-            <input type="text"></input>
-            <input type="submit" value="Submit"></input>
-        </form>
+    useEffect(() => {
+        if (!isEmpty(user)) window.location.assign('/')
+    }, [])
 
-        <h4>For orgs:</h4>
-        <form>
-            <label>Username:</label>
-            <input type="text"></input><br></br>
-            <label>Password:</label>
-            <input type="text"></input><br></br>
-            <label>Email:</label>
-            <input type="text"></input><br></br>
-            <label>Location:</label>
-            <input type="text"></input>
-            <input type="submit" value="Submit"></input>
-        </form>
-    </div>
-  )
+    async function signupUser(e) {
+        e.preventDefault()
+        if (!username) {
+            setErr('Please enter a username')
+        } else if (!password) {
+            setErr('Please enter a password')
+        } else {
+            const resp = await fetch('http://localhost:5000/auth/signup', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username,
+                    password,
+                    userType: 'user'
+                })
+            })
+            const { account, err } = await resp.json()
+            if (err) {
+                setErr(err.message)
+                console.log('Error signing up', err)
+            } else {
+                login('user', account._id)
+            }
+        }
+    }
+
+    async function signupOrg(e) {
+        e.preventDefault()
+        if (!name) {
+            setErr('Please enter a name')
+        } else if (!username) {
+            setErr('Please enter a username')
+        } else if (!password) {
+            setErr('Please enter a password')
+        } else {
+            const resp = await fetch('http://localhost:5000/auth/signup', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name,
+                    username,
+                    password,
+                    userType: 'org'
+                })
+            })
+            const { account, err } = await resp.json()
+            if (err) {
+                setErr(err.message)
+                console.log('Error signing up', err)
+            } else {
+                login('org', account._id)
+            }
+        }
+    }
+
+    return (
+        <div>
+            <h1>Sign Up</h1>
+            <a href="/login">Have an account? Log in here.</a>
+
+            <h4>For users:</h4>
+            <form>
+                <label>Username:</label>
+                <input type="text" onChange={(e) => setUsername(e.target.value)}></input><br></br>
+                <label>Password:</label>
+                <input type="password" onChange={(e) => setPassword(e.target.value)}></input><br></br>
+                <button onClick={(e) => signupUser(e)}>Sign up</button>
+            </form>
+
+            <h4>For orgs:</h4>
+            <form>
+                <label>Name:</label>
+                <input type="text" onChange={(e) => setName(e.target.value)}></input><br></br>
+                <label>Username:</label>
+                <input type="text" onChange={(e) => setUsername(e.target.value)}></input><br></br>
+                <label>Password:</label>
+                <input type="password" onChange={(e) => setPassword(e.target.value)}></input><br></br>
+                <button onClick={(e) => signupOrg(e)}>Sign up</button>
+            </form>
+
+            { err && <p>{err}</p> }
+        </div>
+    )
 }
