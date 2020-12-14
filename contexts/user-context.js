@@ -7,7 +7,6 @@ export const UserContext = createContext()
 const UserContextProvider = (props) => {
     const [user, setUser] = useState({})
     const [userType, setUserType] = useState()
-    const [fetching, setFetching] = useState(true)
     const router = useRouter()
 
     useEffect(() => {
@@ -19,7 +18,6 @@ const UserContextProvider = (props) => {
                 const utype = localStorage.getItem('utype')
                 await login(utype, uid)
             }
-            setFetching(true)
             callLoginAsync(uid)
         }
     }, [])
@@ -38,16 +36,14 @@ const UserContextProvider = (props) => {
             .then(({ account, err }) => {
                 if (err) {
                     console.log('Error getting account', err)
-                    return
+                } else {
+                    setUser(account)
+                    setUserType(userType)
+                    router.push('/')
                 }
-                setUser(account)
-                setUserType(userType)
-                setFetching(false)
-                router.push('/')
             })
             .catch((err) => {
                 console.log('Error logging in', err)
-                setFetching(false)
             })
     }
 
@@ -60,7 +56,7 @@ const UserContextProvider = (props) => {
     }
 
     return (
-        <UserContext.Provider value={{ user, userType, updateUser, login, logout, fetching }}>
+        <UserContext.Provider value={{ user, userType, updateUser, login, logout }}>
             {props.children}
         </UserContext.Provider>
     )

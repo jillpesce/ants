@@ -4,11 +4,13 @@ import { UserContext } from '../contexts/user-context'
 import isEmpty from 'lodash/isEmpty'
 
 export default function Home() {
-    const { user, userType, logout, fetching } = useContext(UserContext)
+    const { user, userType, logout } = useContext(UserContext)
 
     useEffect(() => {
-        if (!fetching && isEmpty(user)) window.location.assign('/login')
-    }, [])
+        if (!user) window.location.assign('/login')
+    })
+
+    if (!user) return (<div/>)
 
     return (
         <div>
