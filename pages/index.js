@@ -6,12 +6,14 @@ import Org from 'Components/Org'
 import { use } from '../../ants-server/routes'
 
 export default function Home() {
-    const { user, userType, logout, fetching } = useContext(UserContext)
     const [orgs, setOrgsList] = useState([]);
+    const { user, userType, logout } = useContext(UserContext)
 
     useEffect(() => {
-        if (!fetching && isEmpty(user)) window.location.assign('/login')
-    }, [])
+        if (!user) window.location.assign('/login')
+    })
+
+    if (!user) return (<div/>)
 
     useEffect(() => {
         fetch(`http://localhost:5000/orgs/getOrgs`, {
