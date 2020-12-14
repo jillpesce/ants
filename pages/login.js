@@ -1,53 +1,65 @@
-import Head from 'next/head'
-import Link from 'next/link'
-import styles from '../styles/Home.module.css'
+import { UserContext } from '../contexts/user-context'
+import { useContext, useEffect, useState } from 'react'
+import isEmpty from 'lodash/isEmpty'
 
 export default function Login() {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Login</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    const { user, login } = useContext(UserContext)
+    const [username, setUsername] = useState()
+    const [password, setPassword] = useState()
+    const [userType, setUserType] = useState()
+    const [err, setErr] = useState()
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Login
-        </h1>
+    useEffect(() => {
+        if (!isEmpty(user)) window.location.assign('/')
+    }, [])
 
+    async function submit(e) {
+        e.preventDefault()
+        if (!username) {
+            setErr('Please enter your username')
+        } else if (!password) {
+            setErr('Please enter your password')
+        } else if (!userType) {
+            setErr('Please choose account type')
+        } else {
+            const resp = await fetch('http://localhost:5000/auth/login', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username,
+                    password,
+                    userType
+                })
+            })
+            const { account, err } = await resp.json()
+            if (err) {
+                console.log('Error logging in', err)
+                setErr(err.message)
+            } else {
+                login(userType, account._id)
+            }
+        }
+    }
 
-        <h4>For users:</h4>
-        <form>
-            <label>Username:</label>
-            <input type="text"></input><br></br>
-            <label>Password:</label>
-            <input type="text"></input>
-            <input type="submit" value="Submit"></input>
-        </form>
-
-        <h4>For orgs:</h4>
-        <form>
-            <label>Username:</label>
-            <input type="text"></input><br></br>
-            <label>Password:</label>
-            <input type="text"></input>
-            <input type="submit" value="Submit"></input>
-        </form>
-
-        <h4>New User? <Link href="/signup">Sign Up</Link></h4>
-
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
+    return (
+        <div>
+            <h1>Log in</h1>
+            <a href="/signup">Don't have an account? Sign up here.</a><br/><br/>
+            <form>
+                <label>Username:</label>
+                <input type="text" onChange={(e) => setUsername(e.target.value)}></input><br/><br/>
+                <label>Password:</label>
+                <input type="password" onChange={(e) => setPassword(e.target.value)}></input><br/><br/>
+                <label>Account Type</label><br/>
+                <input type="radio" id="user" name="account" value="user" onChange={() => setUserType('user')}/>
+                <label>User</label><br/>
+                <input type="radio" id="org" name="account" value="org" onChange={() => setUserType('org')} />
+                <label>Organization</label><br/><br/>
+                {err && <><p>{err}</p><br/></>}
+                <button onClick={(e) => submit(e)}>Log in</button>
+            </form>
+        </div>
+    )
 }
