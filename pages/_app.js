@@ -1,4 +1,8 @@
 import '../components/styles/Header.css'
+import './styles/Resources.css'
+
+import 'bootstrap/dist/css/bootstrap.css'
+
 
 import { useEffect } from 'react'
 import UserContextProvider from '../contexts/user-context'
