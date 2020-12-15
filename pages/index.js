@@ -1,18 +1,16 @@
-import Head from 'next/head'
 import { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../contexts/user-context'
 import isEmpty from 'lodash/isEmpty'
 import Org from '../components/Org'
 import Header from '../components/Header'
+import CreatePost from '../components/CreatePost'
 
 export default function Home() {
     const { user, userType, logout } = useContext(UserContext)
     const [orgs, setOrgsList] = useState([]);
 
-    // const orgs = [{name: 'jill', description: 'this is my org', interests: ['environment', 'education']},
-    // {name: 'liv', description: 'this is my org!'}]
-
-    useEffect(() => {fetch(`http://localhost:5000/orgs`)
+    useEffect(() => {
+      fetch(`http://localhost:5000/orgs`)
         .then((resp) => resp.json())
         .then(({ data, err }) => {
         if (err) {
@@ -52,7 +50,12 @@ export default function Home() {
                 />;
             }) : <p>No recommended orgs at this time</p>
           }
-          </div> : <p>This is an org page</p>
+          </div> : (
+            <div>
+              <p>This is an org page</p>
+              <CreatePost orgid={user._id}/>
+            </div>
+          )
         }
         </div>
     )
