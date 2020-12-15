@@ -1,6 +1,7 @@
 import { UserContext } from '../contexts/user-context'
 import { useContext, useEffect, useState } from 'react'
 import isEmpty from 'lodash/isEmpty'
+import styles from './styles/Login.module.css'
 
 export default function Login() {
     const { user, login } = useContext(UserContext)
@@ -45,7 +46,8 @@ export default function Login() {
 
     return (
         <div>
-            <h1>Log in</h1>
+            <h1 className={styles.ants}>Welcome to Ants!</h1>
+            <h3>Log In</h3>
             <a href="/signup">Don't have an account? Sign up here.</a><br/><br/>
             <form>
                 <label>Username:</label>

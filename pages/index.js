@@ -6,7 +6,7 @@ import Header from '../components/Header'
 import CreatePost from '../components/CreatePost'
 
 export default function Home() {
-    const { user, userType, logout } = useContext(UserContext)
+    const { user, userType } = useContext(UserContext)
     const [orgs, setOrgsList] = useState([]);
 
     //get orgs 
@@ -36,7 +36,6 @@ export default function Home() {
         <div>
           <Header />
           <h1> Welcome {userType}, {user.username} </h1>
-          <button onClick={logout}>Log out</button>
 
         {userType == 'user' ?
           <div>

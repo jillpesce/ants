@@ -22,3 +22,10 @@
   color: white !important;
   font-size: 12pt
 }
+
+.button {
+  background-color: #6B385D;
+  color: white;
+  border: none;
+  font-size: 12pt
+}
