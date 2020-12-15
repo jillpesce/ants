@@ -9,6 +9,7 @@ export default function Home() {
     const { user, userType, logout } = useContext(UserContext)
     const [orgs, setOrgsList] = useState([]);
 
+    //get orgs 
     useEffect(() => {
       fetch(`http://localhost:5000/orgs`)
         .then((resp) => resp.json())
@@ -28,6 +29,7 @@ export default function Home() {
         if (!user) window.location.assign('/login')
     })
 
+
     if (!user) return (<div/>)
 
     return (
@@ -46,6 +48,8 @@ export default function Home() {
                 return <Org name={org.name}
                   description={org.description}
                   interests = {org.interests}
+                  id = {org._id}
+                  user = {user.username}
                 />;
             }) : <p>No recommended orgs at this time</p>
           }
