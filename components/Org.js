@@ -56,7 +56,9 @@ const Org = (props) => {
     <div>
         <h2> Name: {props.name}</h2>
         <p>Description: {props.description}</p>
-        <p>Interests: {props.interests}</p>
+        <p>Interests: {props.interests.map(i => {
+            return <li>{i}</li>
+        })}</p>
         <button onClick={buttonText == "Follow" ? followOrg : unfollowOrg}>{buttonText}</button>
 
     </div>
