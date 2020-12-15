@@ -1,11 +1,9 @@
-const interests = [
+export default [
     "WELLNESS",
-    "POLITIcS",
+    "POLITICS",
     "LGBTQ",
     "BLACK LIVES MATTER",
     "SCIENCE",
     "ENVIRONMENT",
     "EDUCATION"
-];
-
-export { interests };
+]

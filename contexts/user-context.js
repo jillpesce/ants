@@ -37,11 +37,12 @@ const UserContextProvider = (props) => {
                 if (err) {
                     console.log('Error getting account', err)
                 } else {
-                  console.log(account)
                     setUser(account)
                     setUserType(userType)
-                    console.log('here')
-                    if (redirect) router.push('/')
+                    if (redirect) {
+                      if (!account.interests.length && !account.locations.length) router.push('/update')
+                      else router.push('/')
+                    }
                 }
             })
             .catch((err) => {

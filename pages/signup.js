@@ -15,29 +15,23 @@ export default function Signup() {
 
     async function signupUser(e) {
         e.preventDefault()
-        if (!username) {
-            setErr('Please enter a username')
-        } else if (!password) {
-            setErr('Please enter a password')
-        } else {
-            const resp = await fetch('http://localhost:5000/auth/signup', {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify({
-                    username,
-                    password,
-                    userType: 'user'
-                })
+        const resp = await fetch('http://localhost:5000/auth/signup', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                username,
+                password,
+                userType: 'user'
             })
-            const { account, err } = await resp.json()
-            if (err) {
-                setErr(err.message)
-                console.log('Error signing up', err)
-            } else {
-                login('user', account._id, true)
-            }
+        })
+        const { account, err } = await resp.json()
+        if (err) {
+            setErr(err.message)
+            console.log('Error signing up', err)
+        } else {
+            login('user', account._id, true)
         }
     }
 
@@ -67,7 +61,7 @@ export default function Signup() {
                 setErr(err.message)
                 console.log('Error signing up', err)
             } else {
-                login('org', account._id)
+                login('org', account._id, true)
             }
         }
     }
