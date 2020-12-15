@@ -26,7 +26,7 @@ const UserContextProvider = (props) => {
         setUser(u)
     }
 
-    async function login(userType, uid) {
+    async function login(userType, uid, redirect) {
         if (user && user._id === uid) return
         localStorage.setItem('uid', uid)
         localStorage.setItem('utype', userType)
@@ -37,9 +37,11 @@ const UserContextProvider = (props) => {
                 if (err) {
                     console.log('Error getting account', err)
                 } else {
+                  console.log(account)
                     setUser(account)
                     setUserType(userType)
-                    router.push('/')
+                    console.log('here')
+                    if (redirect) router.push('/')
                 }
             })
             .catch((err) => {

@@ -10,7 +10,7 @@ export default function Signup() {
     const [err, setErr] = useState()
 
     useEffect(() => {
-        if (!isEmpty(user)) window.location.assign('/')
+      if (!isEmpty(user)) window.location.assign('/')
     }, [])
 
     async function signupUser(e) {
@@ -36,7 +36,7 @@ export default function Signup() {
                 setErr(err.message)
                 console.log('Error signing up', err)
             } else {
-                login('user', account._id)
+                login('user', account._id, true)
             }
         }
     }

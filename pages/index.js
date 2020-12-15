@@ -3,12 +3,13 @@ import { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../contexts/user-context'
 import isEmpty from 'lodash/isEmpty'
 import Org from '../components/Org'
+import Header from '../components/Header'
 
 export default function Home() {
     const { user, userType, logout } = useContext(UserContext)
     const [orgs, setOrgsList] = useState([]);
 
-    // const orgs = [{name: 'jill', description: 'this is my org', interests: ['environment', 'education']}, 
+    // const orgs = [{name: 'jill', description: 'this is my org', interests: ['environment', 'education']},
     // {name: 'liv', description: 'this is my org!'}]
 
     //get list of orgs 
@@ -35,9 +36,10 @@ export default function Home() {
 
     return (
         <div>
-            <h1>Home page</h1>
-            <p> Welcome {userType}, {user.username} </p>
-            <button onClick={logout}>Log out</button>
+          <Header />
+          <h1>Home page</h1>
+          <p> Welcome {userType}, {user.username} </p>
+          <button onClick={logout}>Log out</button>
 
         {userType == 'user' ?
             <div>
@@ -55,8 +57,6 @@ export default function Home() {
             }
             </div> : <p>This is an org page</p>
         }
-            
         </div>
-
     )
 }

@@ -1,10 +1,10 @@
 import Header from '../components/Header'
 
-export default function Resources() {
+export default function Profile() {
   return (
     <div>
       <Header />
-      <h1>Resources</h1>
+      <h1>Profile Page</h1>
     </div>
   )
 }

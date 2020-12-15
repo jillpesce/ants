@@ -10,7 +10,7 @@ export default function Login() {
     const [err, setErr] = useState()
 
     useEffect(() => {
-        if (!isEmpty(user)) window.location.assign('/')
+      if (!isEmpty(user)) window.location.assign('/')
     }, [])
 
     async function submit(e) {
@@ -38,7 +38,7 @@ export default function Login() {
                 console.log('Error logging in', err)
                 setErr(err.message)
             } else {
-                login(userType, account._id)
+                login(userType, account._id, true)
             }
         }
     }
