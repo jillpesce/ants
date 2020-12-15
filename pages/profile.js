@@ -38,9 +38,14 @@ export default function Profile() {
     <div>
       <Header />
       <h1>{user.username} Profile Page</h1>
+      {console.log(user)}
       <p>Username: {user.username}</p>
-      <p>Location: {user.locations}</p>
-      <p>Interests: {user.interests}</p>
+      <p>Location: {user.locations && user.locations.map(l => {
+        return <li>{l}</li>
+      })}</p>
+      <p>Interests: {user.interests && user.interests.map(i => {
+        return <li>{i}</li>
+      })}</p>
       <h2>Organizations you follow:</h2>
       { followedOrgs !== undefined ?
                 followedOrgs.map((org) => {
