@@ -1,15 +1,12 @@
 import Head from 'next/head'
 import { useContext, useEffect, useState } from 'react'
-import { UserContext } from '../contexts/user-context'
+import { UserContext } from '../../contexts/user-context'
 import isEmpty from 'lodash/isEmpty'
-import Org from '../components/Org'
+import Org from '../../components/Org'
 
-export default function Home() {
+export default function UserProfile() {
     const { user, userType, logout } = useContext(UserContext)
-    const [orgs, setOrgsList] = useState([]);
-
-    // const orgs = [{name: 'jill', description: 'this is my org', interests: ['environment', 'education']}, 
-    // {name: 'liv', description: 'this is my org!'}]
+    const [followedOrgs, setFollowedOrgsList] = useState([]);
 
     //get list of orgs 
     useEffect(() => {fetch(`http://localhost:5000/orgs`)
@@ -26,23 +23,24 @@ export default function Home() {
         })}
     , [])
 
-    useEffect(() => {
-        if (!user) window.location.assign('/login')
-    })
+    // useEffect(() => {
+    //     if (!user) window.location.assign('/login')
+    // })
 
 
-    if (!user) return (<div/>)
+    // if (!user) return (<div/>)
 
     return (
         <div>
-            <h1>Home page</h1>
+            <h1>Profile Page</h1>
             <p> Welcome {userType}, {user.username} </p>
             <button onClick={logout}>Log out</button>
-
-        {userType == 'user' ?
+            <h2>User info:</h2>
+            <p>Interests</p>
+        
             <div>
             <hr></hr>
-            <h2>Recommended Orgs For You:</h2>
+            <h2>Your Followed Orgs:</h2>
             { orgs !== undefined ?
                 orgs.map((org) => {
                             return <Org name={org.name}
@@ -53,8 +51,11 @@ export default function Home() {
                             />;
                         }) : <p>No recommended orgs at this time</p>
             }
-            </div> : <p>This is an org page</p>
-        }
+            </div> 
+            <hr></hr>
+            <h2>Liked posts:</h2>
+
+        
             
         </div>
 
