@@ -39,7 +39,6 @@ export default function CreatePost(props) {
           console.log('Error creating post', err)
           setErr(err)
         } else {
-          console.log(post)
           setErr('')
           setSuccess('Successfully created post!')
         }

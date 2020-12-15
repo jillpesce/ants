@@ -43,7 +43,6 @@ export default function Home() {
           <h2>Recommended Orgs For You:</h2>
           { orgs !== undefined ?
             orgs.map((org) => {
-                console.log(org);
                 return <Org name={org.name}
                   description={org.description}
                   interests = {org.interests}
