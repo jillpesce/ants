@@ -35,8 +35,7 @@ export default function Home() {
     return (
         <div>
           <Header />
-          <h1>Home page</h1>
-          <p> Welcome {userType}, {user.username} </p>
+          <h1> Welcome {userType}, {user.username} </h1>
           <button onClick={logout}>Log out</button>
 
         {userType == 'user' ?
