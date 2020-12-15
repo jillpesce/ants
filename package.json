@@ -11,8 +11,13 @@
     "lodash": "^4.17.20",
     "mongodb": "^3.6.3",
     "next": "latest",
+    "next-images": "^1.6.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "file-loader": "^6.2.0",
+    "url-loader": "^4.1.1"
+  }
 }
