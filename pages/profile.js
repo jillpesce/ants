@@ -14,6 +14,7 @@ export default function Profile() {
       if(isEmpty(user)) {
         return;
       } else {
+      if (userType == 'user') {
       console.log("username: " + user.username);
         const fetchPath = user.username;
         console.log('fetch path: ' + fetchPath);
@@ -30,7 +31,7 @@ export default function Profile() {
             console.log('Error getting orgs', err)
         })
       
-      }}
+      }}}
     , [user])
 
 
@@ -46,6 +47,8 @@ export default function Profile() {
       <p>Interests: {user.interests && user.interests.map(i => {
         return <li>{i}</li>
       })}</p>
+      {userType == 'user' ?
+      <div>
       <h2>Organizations you follow:</h2>
       { followedOrgs !== undefined ?
                 followedOrgs.map((org) => {
@@ -57,7 +60,9 @@ export default function Profile() {
                             />;
                         }) : <p>No recommended orgs at this time</p>
             }
-      <h2>Posts you like:</h2>
+    <h2>Posts you like:</h2></div> : 
+    <h2>Your Posts:</h2>
+    }
     </div>
   )
 }
