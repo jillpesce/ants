@@ -80,6 +80,7 @@ export default function CreatePost(props) {
 
             <label>Description:</label>
             <textarea onChange={(e) => setDescription(e.target.value)}></textarea><br/><br/>
+            {err && <p>{err}</p>}
             <button onClick={(e) => post(e)}>Post</button>
             <button onClick={(e) => {
               e.preventDefault()

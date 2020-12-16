@@ -29,24 +29,28 @@ export default function Home() {
               console.log('Error getting orgs', err)
           })
       } else if (userType && userType == 'org') {
-        fetch(`http://localhost:5000/posts/${user._id}`)
-          .then((resp) => resp.json())
-          .then(({ posts, err }) => {
-          if (err) {
-              console.log('Error getting posts', err)
-          } else {
-              setPosts(posts)
-          }
-          })
-          .catch((err) => {
-              console.log('Error getting posts', err)
-          })}
+        fetchPosts()
       }
-    , [userType])
+    }, [userType])
 
     useEffect(() => {
         if (!user) window.location.assign('/login')
     })
+
+    function fetchPosts() {
+      fetch(`http://localhost:5000/posts/${user._id}`)
+        .then((resp) => resp.json())
+        .then(({ posts, err }) => {
+        if (err) {
+            console.log('Error getting posts', err)
+        } else {
+            setPosts(posts)
+        }
+        })
+        .catch((err) => {
+            console.log('Error getting posts', err)
+        })
+    }
 
 
     if (!user) return (<div/>)
@@ -75,7 +79,10 @@ export default function Home() {
             <div>
               <p>This is an org page</p>
               <button onClick={()=>setCreate(true)}>Create a Post</button>
-              <CreatePost create={create} orgid={user._id} close={() => setCreate(false)}/>
+              <CreatePost create={create} orgid={user._id} close={() => {
+                setCreate(false)
+                fetchPosts()
+              }}/>
               <h2> Your Posts </h2>
               {posts && posts.map((post) => (<Post {...post} org={user} />))
               }

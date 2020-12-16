@@ -70,20 +70,8 @@ export default function Update() {
     return (
         <div>
             <Header />
-            <h1>Update profile</h1>
-            <h3>Current interests:</h3>
-            {user.interests && user.interests.length ? (
-              user.interests.map(i => <div key={i}>{i}</div>)
-            ) : <div>No interests yet! Select some below.</div>}
-            <br />
-            <h3>Current locations:</h3>
-            {user.locations && user.locations.length ? (
-              user.locations.map(l => <div key={l}>{l}</div>)
-            ) : <div>No locations yet! Select some below.</div>}
-            <br/>
-            <br/>
             <form>
-                <label>Interests:</label>
+                <h3> Set Interests:</h3>
                 {interestsList.map(i => (
                   <div key={i}>
                     {interests.includes(i) ? (
@@ -95,7 +83,7 @@ export default function Update() {
                   </div>
                 ))}
                 <br/>
-                <label>Locations:</label>
+                <h3>Set Locations:</h3>
                 {locationsList.map(l => (
                   <div key={l}>
                     {locations.includes(l) ? (

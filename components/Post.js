@@ -4,14 +4,14 @@ import { isEmpty } from 'lodash'
 
 const Post = (props) => {
   const [buttonText, setButtonText] = useState()
-  const [err, setErr] = useState('')
-  const { user, updateUser } = useContext(UserContext)
+  const { user, userType, updateUser } = useContext(UserContext)
+  const [numLikes, setNumLikes] = useState(props.likes && props.likes.length || 0)
 
     const { _id, title, description, location, type, org, userid } = props
 
     useEffect(() => {
       if(isEmpty(user)) return
-      setButtonText(user.liked.includes(_id) ? 'Liked' : 'Like')
+      if (userType == 'user') setButtonText(user.liked.includes(_id) ? 'Liked' : 'Like')
     }, [user])
 
 
@@ -31,10 +31,11 @@ const Post = (props) => {
         postid: _id,
       })
     }).then((response) => response.json())
-    .then(({ err, user }) => {
+    .then(({ err, user, post }) => {
       if (err) console.log('Error liking post', err)
       else {
         updateUser(user)
+        setNumLikes(post.likes.length)
         setButtonText('Liked')
       }
     })
@@ -56,6 +57,7 @@ const Post = (props) => {
       if (err) console.log('Error liking post', err)
       else {
         updateUser(user)
+        setNumLikes(post.likes.length)
         setButtonText('Like')
       }
     })
@@ -70,8 +72,8 @@ const Post = (props) => {
           {type} by {org.name} in {location}
         </h6>
         <p className="card-text">Description: {description}</p>
-        <button onClick={buttonText == "Like" ? likePost : unlikePost}>{buttonText}</button>
-        { err && <p>{err}</p>}
+        { userType == 'user' && <button onClick={buttonText == "Like" ? likePost : unlikePost}>{buttonText}</button> }
+        <p>{numLikes} Likes</p>
       </div>
     </div>
   )
