@@ -1,13 +1,13 @@
 * {
-    margin: 1%
+    margin: 1%;
 }
 
 .card {
-    width: 40%; 
-    display: inline-block !important; 
-    margin : 2.5%
+    width: 40%;
+    display: inline-block !important;
+    margin: 2.5%;
 }
 
 .card-img-top {
-    margin: 0
+    margin: 0;
 }

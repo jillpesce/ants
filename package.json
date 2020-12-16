@@ -1,22 +1,23 @@
 {
-  "name": "Ants",
-  "version": "0.1.0",
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
-  "dependencies": {
-    "bootstrap": "^4.5.3",
-    "lodash": "^4.17.20",
-    "next": "latest",
-    "next-images": "^1.6.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "file-loader": "^6.2.0",
-    "url-loader": "^4.1.1"
-  }
+    "name": "Ants",
+    "version": "0.1.0",
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start"
+    },
+    "dependencies": {
+        "bootstrap": "^4.5.3",
+        "lodash": "^4.17.20",
+        "next": "latest",
+        "next-images": "^1.6.2",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1"
+    },
+    "license": "MIT",
+    "devDependencies": {
+        "file-loader": "^6.2.0",
+        "prettier": "2.2.1",
+        "url-loader": "^4.1.1"
+    }
 }

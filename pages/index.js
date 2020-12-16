@@ -15,22 +15,22 @@ export default function Home() {
 
     //get orgs
     useEffect(() => {
-      if (userType && userType == 'user') {
-        fetch(`http://localhost:5000/orgs`)
-          .then((resp) => resp.json())
-          .then(({ data, err }) => {
-          if (err) {
-              console.log('Error getting orgs', err)
-          } else {
-              setOrgsList(data)
-          }
-          })
-          .catch((err) => {
-              console.log('Error getting orgs', err)
-          })
-      } else if (userType && userType == 'org') {
-        fetchPosts()
-      }
+        if (userType && userType == 'user') {
+            fetch(`http://localhost:5000/orgs`)
+                .then((resp) => resp.json())
+                .then(({ data, err }) => {
+                    if (err) {
+                        console.log('Error getting orgs', err)
+                    } else {
+                        setOrgsList(data)
+                    }
+                })
+                .catch((err) => {
+                    console.log('Error getting orgs', err)
+                })
+        } else if (userType && userType == 'org') {
+            fetchPosts()
+        }
     }, [userType])
 
     useEffect(() => {
@@ -38,58 +38,70 @@ export default function Home() {
     })
 
     function fetchPosts() {
-      fetch(`http://localhost:5000/posts/${user._id}`)
-        .then((resp) => resp.json())
-        .then(({ posts, err }) => {
-        if (err) {
-            console.log('Error getting posts', err)
-        } else {
-            setPosts(posts)
-        }
-        })
-        .catch((err) => {
-            console.log('Error getting posts', err)
-        })
+        fetch(`http://localhost:5000/posts/${user._id}`)
+            .then((resp) => resp.json())
+            .then(({ posts, err }) => {
+                if (err) {
+                    console.log('Error getting posts', err)
+                } else {
+                    setPosts(posts)
+                }
+            })
+            .catch((err) => {
+                console.log('Error getting posts', err)
+            })
     }
 
-
-    if (!user) return (<div/>)
+    if (!user) return <div />
 
     return (
         <div>
-          <Header />
-          <h1> Welcome {userType}, {user.username} </h1>
+            <Header />
+            <h1>
+                {' '}
+                Welcome {userType}, {user.username}{' '}
+            </h1>
 
-        {userType == 'user' ? (
-          <div>
-            <hr></hr>
-            <h2>Recommended Orgs For You:</h2>
-            { orgs !== undefined ?
-              orgs.map((org) => {
-                  return <Org name={org.name}
-                    description={org.description}
-                    interests = {org.interests}
-                    id = {org._id}
-                    user = {user.username}
-                  />;
-              }) : <p>No recommended orgs at this time</p>
-            }
-          </div>
-        ) : (
-            <div>
-              <p>This is an org page</p>
-              <button onClick={()=>setCreate(true)}>Create a Post</button>
-              <CreatePost create={create} orgid={user._id} close={() => {
-                setCreate(false)
-                fetchPosts()
-              }}/>
-              <h2> Your Posts </h2>
-              {posts && posts.map((post) => (<Post {...post} org={user} />))
-              }
-              {!posts.length && <p>Create a post to attract ants!</p> }
-            </div>
-          )
-        }
+            {userType == 'user' ? (
+                <div>
+                    <hr></hr>
+                    <h2>Recommended Orgs For You:</h2>
+                    {orgs !== undefined ? (
+                        orgs.map((org) => {
+                            return (
+                                <Org
+                                    name={org.name}
+                                    description={org.description}
+                                    interests={org.interests}
+                                    id={org._id}
+                                    user={user.username}
+                                />
+                            )
+                        })
+                    ) : (
+                        <p>No recommended orgs at this time</p>
+                    )}
+                </div>
+            ) : (
+                <div>
+                    <p>This is an org page</p>
+                    <button onClick={() => setCreate(true)}>
+                        Create a Post
+                    </button>
+                    <CreatePost
+                        create={create}
+                        orgid={user._id}
+                        close={() => {
+                            setCreate(false)
+                            fetchPosts()
+                        }}
+                    />
+                    <h2> Your Posts </h2>
+                    {posts &&
+                        posts.map((post) => <Post {...post} org={user} />)}
+                    {!posts.length && <p>Create a post to attract ants!</p>}
+                </div>
+            )}
         </div>
     )
 }

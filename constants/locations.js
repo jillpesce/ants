@@ -1,6 +1,1 @@
-export default [
-    "PHILADELPHIA",
-    "DC",
-    "NYC",
-    "BOSTON",
-]
+export default ['PHILADELPHIA', 'DC', 'NYC', 'BOSTON']
