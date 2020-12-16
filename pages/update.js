@@ -43,16 +43,19 @@ export default function Update() {
         if (!locations.length && !interests.length) {
             setErr('Please select interests or locations')
         } else {
-            fetch(`http://localhost:5000/${userType}s/update/${user._id}`, {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json',
-                },
-                body: JSON.stringify({
-                    interests,
-                    locations,
-                }),
-            })
+            fetch(
+                `https://ants-senior-design.herokuapp.com/${userType}s/update/${user._id}`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        interests,
+                        locations,
+                    }),
+                }
+            )
                 .then((resp) => resp.json())
                 .then(({ user, org, err }) => {
                     if (err) {

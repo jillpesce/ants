@@ -16,7 +16,7 @@ export default function Home() {
     //get orgs
     useEffect(() => {
         if (userType && userType == 'user') {
-            fetch(`http://localhost:5000/orgs`)
+            fetch(`https://ants-senior-design.herokuapp.com/orgs`)
                 .then((resp) => resp.json())
                 .then(({ data, err }) => {
                     if (err) {
@@ -38,7 +38,7 @@ export default function Home() {
     })
 
     function fetchPosts() {
-        fetch(`http://localhost:5000/posts/${user._id}`)
+        fetch(`https://ants-senior-design.herokuapp.com/posts/${user._id}`)
             .then((resp) => resp.json())
             .then(({ posts, err }) => {
                 if (err) {

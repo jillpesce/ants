@@ -16,7 +16,9 @@ export default function Profile() {
             return
         }
 
-        fetch(`http://localhost:5000/orgs/followed/${user.username}`)
+        fetch(
+            `https://ants-senior-design.herokuapp.com/orgs/followed/${user.username}`
+        )
             .then((resp) => resp.json())
             .then(({ data, err }) => {
                 if (err) {
@@ -29,7 +31,9 @@ export default function Profile() {
                 console.log('Error getting orgs', err)
             })
 
-        fetch(`http://localhost:5000/posts/liked/${user._id}`)
+        fetch(
+            `https://ants-senior-design.herokuapp.com/posts/liked/${user._id}`
+        )
             .then((resp) => resp.json())
             .then(({ posts, err }) => {
                 if (err) {

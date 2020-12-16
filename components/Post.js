@@ -23,7 +23,7 @@ const Post = (props) => {
             setErr('Only users can like posts')
             return
         }
-        fetch('http://localhost:5000/posts/like', {
+        fetch('https://ants-senior-design.herokuapp.com/posts/like', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -46,7 +46,7 @@ const Post = (props) => {
 
     //unfollow org
     function unlikePost() {
-        fetch('http://localhost:5000/posts/unlike', {
+        fetch('https://ants-senior-design.herokuapp.com/posts/unlike', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

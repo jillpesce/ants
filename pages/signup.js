@@ -15,17 +15,20 @@ export default function Signup() {
 
     async function signupUser(e) {
         e.preventDefault()
-        const resp = await fetch('http://localhost:5000/auth/signup', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify({
-                username,
-                password,
-                userType: 'user',
-            }),
-        })
+        const resp = await fetch(
+            'https://ants-senior-design.herokuapp.com/auth/signup',
+            {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username,
+                    password,
+                    userType: 'user',
+                }),
+            }
+        )
         const { account, err } = await resp.json()
         if (err) {
             setErr(err.message)
@@ -44,18 +47,21 @@ export default function Signup() {
         } else if (!password) {
             setErr('Please enter a password')
         } else {
-            const resp = await fetch('http://localhost:5000/auth/signup', {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name,
-                    username,
-                    password,
-                    userType: 'org',
-                }),
-            })
+            const resp = await fetch(
+                'https://ants-senior-design.herokuapp.com/auth/signup',
+                {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name,
+                        username,
+                        password,
+                        userType: 'org',
+                    }),
+                }
+            )
             const { account, err } = await resp.json()
             if (err) {
                 setErr(err.message)

@@ -13,7 +13,7 @@ export default function Feed() {
         let allPosts = []
         for (const i in user.following) {
             const orgid = user.following[i]
-            fetch(`http://localhost:5000/posts/${orgid}`)
+            fetch(`https://ants-senior-design.herokuapp.com/posts/${orgid}`)
                 .then((resp) => resp.json())
                 .then(({ posts, err }) => {
                     if (err) {

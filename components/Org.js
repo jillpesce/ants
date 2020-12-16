@@ -17,7 +17,7 @@ const Org = (props) => {
     const followOrg = () => {
         let username = props.user
         let orgID = props.id
-        fetch('http://localhost:5000/users/followOrg', {
+        fetch('https://ants-senior-design.herokuapp.com/users/followOrg', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -39,7 +39,7 @@ const Org = (props) => {
     const unfollowOrg = () => {
         let username = props.user
         let orgID = props.id
-        fetch('http://localhost:5000/users/unfollowOrg', {
+        fetch('https://ants-senior-design.herokuapp.com/users/unfollowOrg', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

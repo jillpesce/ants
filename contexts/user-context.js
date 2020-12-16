@@ -31,7 +31,7 @@ const UserContextProvider = (props) => {
         localStorage.setItem('uid', uid)
         localStorage.setItem('utype', userType)
         const fetchPath = userType == 'user' ? `users/${uid}` : `orgs/${uid}`
-        await fetch(`http://localhost:5000/${fetchPath}`)
+        await fetch(`https://ants-senior-design.herokuapp.com/${fetchPath}`)
             .then((resp) => resp.json())
             .then(({ account, err }) => {
                 if (err) {

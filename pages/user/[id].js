@@ -10,7 +10,7 @@ export default function UserProfile() {
 
     //get list of orgs
     useEffect(() => {
-        fetch(`http://localhost:5000/orgs`)
+        fetch(`https://ants-senior-design.herokuapp.com/orgs`)
             .then((resp) => resp.json())
             .then(({ data, err }) => {
                 if (err) {

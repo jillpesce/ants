@@ -23,17 +23,20 @@ export default function Login() {
         } else if (!userType) {
             setErr('Please choose account type')
         } else {
-            const resp = await fetch('http://localhost:5000/auth/login', {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username,
-                    password,
-                    userType,
-                }),
-            })
+            const resp = await fetch(
+                'https://ants-senior-design.herokuapp.com/auth/login',
+                {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username,
+                        password,
+                        userType,
+                    }),
+                }
+            )
             const { account, err } = await resp.json()
             if (err) {
                 console.log('Error logging in', err)

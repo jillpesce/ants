@@ -17,7 +17,9 @@ export default function Profile() {
     useEffect(() => {
         //get id from url
         if (router.query.id == undefined) return
-        fetch(`http://localhost:5000/orgs/${router.query.id}`)
+        fetch(
+            `https://ants-senior-design.herokuapp.com/orgs/${router.query.id}`
+        )
             .then((resp) => resp.json())
             .then(({ account, err }) => {
                 if (err) {
@@ -38,12 +40,17 @@ export default function Profile() {
     useEffect(() => {
         if (isEmpty(user) || isEmpty(org)) return
         if (userType == 'user') {
-        setButtonText(user.following.includes(org._id) ? 'Following' : 'Follow')
-    }}, [user, org])
+            setButtonText(
+                user.following.includes(org._id) ? 'Following' : 'Follow'
+            )
+        }
+    }, [user, org])
 
     useEffect(() => {
         if (isEmpty(router)) return
-        fetch(`http://localhost:5000/posts/${router.query.id}`)
+        fetch(
+            `https://ants-senior-design.herokuapp.com/posts/${router.query.id}`
+        )
             .then((resp) => resp.json())
             .then(({ posts, err }) => {
                 if (err) {
@@ -61,7 +68,7 @@ export default function Profile() {
     const followOrg = () => {
         let username = user.username
         let orgID = org._id
-        fetch('http://localhost:5000/users/followOrg', {
+        fetch('https://ants-senior-design.herokuapp.com/users/followOrg', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -83,7 +90,7 @@ export default function Profile() {
     const unfollowOrg = () => {
         let username = user.username
         let orgID = org._id
-        fetch('http://localhost:5000/users/unfollowOrg', {
+        fetch('https://ants-senior-design.herokuapp.com/users/unfollowOrg', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -109,14 +116,15 @@ export default function Profile() {
             {org && (
                 <div>
                     <h2>{org.name}'s page</h2>
-                    { userType == 'user' && 
-                    <button
-                        onClick={
-                            buttonText == 'Follow' ? followOrg : unfollowOrg
-                        }
-                    >
-                        {buttonText}
-                    </button>}
+                    {userType == 'user' && (
+                        <button
+                            onClick={
+                                buttonText == 'Follow' ? followOrg : unfollowOrg
+                            }
+                        >
+                            {buttonText}
+                        </button>
+                    )}
                     <p>
                         Location:{' '}
                         {org.locations &&
