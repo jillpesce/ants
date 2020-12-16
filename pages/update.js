@@ -5,7 +5,7 @@ import isEmpty from 'lodash/isEmpty'
 import interestsList from '../constants/interests'
 import locationsList from '../constants/locations'
 
-export default function Signup() {
+export default function Update() {
     const { user, userType, updateUser } = useContext(UserContext)
     const [interests, setInterests] = useState([])
     const [locations, setLocations] = useState([])

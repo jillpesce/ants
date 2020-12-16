@@ -1,15 +1,18 @@
-import { Card, Button, Input } from "react";
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react'
+import { UserContext } from '../contexts/user-context'
+import { isEmpty } from 'lodash'
 
 const Org = (props) => {
+    const [buttonText, setButtonText] = useState()
+    const { user, updateUser } = useContext(UserContext)
 
-    const [buttonText, setButtonText] = useState("Follow");
-    const changeText = (text) => setButtonText(text);
+    useEffect(() => {
+      if(isEmpty(user)) return
+      setButtonText(user.following.includes(props.id) ? 'Following' : 'Follow')
+    }, [user])
 
-
-    //follow org 
+    //follow org
     const followOrg = () => {
-        console.log("following");
         let username = props.user;
         let orgID = props.id;
         fetch('http://localhost:5000/users/followOrg', {
@@ -26,12 +29,11 @@ const Org = (props) => {
                 console.log(data);
             });
 
-        changeText("Unfollow");
+        setButtonText('Following');
     }
 
-    //unfollow org 
+    //unfollow org
     const unfollowOrg = () => {
-        console.log("unfollowing");
         let username = props.user;
         let orgID = props.id;
         fetch('http://localhost:5000/users/unfollowOrg', {
@@ -48,7 +50,7 @@ const Org = (props) => {
                 console.log(data);
             });
 
-        changeText("Follow");
+        setButtonText('Follow');
     }
 
 
