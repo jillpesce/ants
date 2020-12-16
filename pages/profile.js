@@ -58,7 +58,7 @@ export default function Profile() {
       <p>Interests: {user.interests && user.interests.map(i => {
         return <li>{i}</li>
       })}</p>
-      {userType == 'user' ?
+      {userType == 'user' &&
       <div>
       <h2>Organizations you follow:</h2>
       { followedOrgs ? followedOrgs.map((org) => (
@@ -74,7 +74,7 @@ export default function Profile() {
       {likedPosts ? likedPosts.map((post) => (<Post {...post} org={user} userid={user._id}/>)) : (
         <p>No posts yet! Go to the feed page to see posts from your orgs.</p>
       )}  </div>
-    : <h2>Your Posts:</h2>}
+    }
     </div>
   )
 }
