@@ -60,7 +60,11 @@ const Org = (props) => {
     return (
         <div className="card">
             <div className="card-body">
-                <h5 className="card-title">{props.name}</h5>
+                <h5>
+                    <a href={`/org/${encodeURIComponent(props.id)}`}>
+                        {props.name}
+                    </a>
+                </h5>
                 <h6 className="card-subtitle mb-2 text-muted">
                     {props.interests.map((i) => {
                         return <li>{i}</li>

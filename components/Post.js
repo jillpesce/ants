@@ -72,7 +72,11 @@ const Post = (props) => {
             <div className="card-body">
                 <h5 className="card-title">{title}</h5>
                 <h6 className="card-subtitle mb-2 text-muted">
-                    {type} by {org.name} in {location}
+                    {type} by{' '}
+                    <a href={`/org/${encodeURIComponent(org._id)}`}>
+                        {org.name}
+                    </a>{' '}
+                    in {location}
                 </h6>
                 <p className="card-text">Description: {description}</p>
                 {userType == 'user' && (

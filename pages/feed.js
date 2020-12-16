@@ -34,10 +34,7 @@ export default function Feed() {
             <Header />
             <h1>Feed</h1>
             <p>Here are posts from the orgs that you follow!</p>
-            {posts &&
-                posts.map((post) => (
-                    <Post {...post} userid={user._id} />
-                ))}
+            {posts && posts.map((post) => <Post {...post} userid={user._id} />)}
             {!posts.length && (
                 <p>No posts yet! Go to the home page to follow more orgs.</p>
             )}

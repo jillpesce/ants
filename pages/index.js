@@ -97,8 +97,7 @@ export default function Home() {
                         }}
                     />
                     <h2> Your Posts </h2>
-                    {posts &&
-                        posts.map((post) => <Post {...post} />)}
+                    {posts && posts.map((post) => <Post {...post} />)}
                     {!posts.length && <p>Create a post to attract ants!</p>}
                 </div>
             )}
