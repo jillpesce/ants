@@ -11,7 +11,7 @@ export default function Login() {
     const [err, setErr] = useState()
 
     useEffect(() => {
-      if (!isEmpty(user)) window.location.assign('/')
+        if (!isEmpty(user)) window.location.assign('/')
     }, [])
 
     async function submit(e) {
@@ -26,13 +26,13 @@ export default function Login() {
             const resp = await fetch('http://localhost:5000/auth/login', {
                 method: 'POST',
                 headers: {
-                    'content-type': 'application/json'
+                    'content-type': 'application/json',
                 },
                 body: JSON.stringify({
                     username,
                     password,
-                    userType
-                })
+                    userType,
+                }),
             })
             const { account, err } = await resp.json()
             if (err) {
@@ -48,18 +48,51 @@ export default function Login() {
         <div>
             <h1 className={styles.ants}>Welcome to Ants!</h1>
             <h3>Log In</h3>
-            <a href="/signup">Don't have an account? Sign up here.</a><br/><br/>
+            <a href="/signup">Don't have an account? Sign up here.</a>
+            <br />
+            <br />
             <form>
                 <label>Username:</label>
-                <input type="text" onChange={(e) => setUsername(e.target.value)}></input><br/><br/>
+                <input
+                    type="text"
+                    onChange={(e) => setUsername(e.target.value)}
+                ></input>
+                <br />
+                <br />
                 <label>Password:</label>
-                <input type="password" onChange={(e) => setPassword(e.target.value)}></input><br/><br/>
-                <label>Account Type</label><br/>
-                <input type="radio" id="user" name="account" value="user" onChange={() => setUserType('user')}/>
-                <label>User</label><br/>
-                <input type="radio" id="org" name="account" value="org" onChange={() => setUserType('org')} />
-                <label>Organization</label><br/><br/>
-                {err && <><p>{err}</p><br/></>}
+                <input
+                    type="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                ></input>
+                <br />
+                <br />
+                <label>Account Type</label>
+                <br />
+                <input
+                    type="radio"
+                    id="user"
+                    name="account"
+                    value="user"
+                    onChange={() => setUserType('user')}
+                />
+                <label>User</label>
+                <br />
+                <input
+                    type="radio"
+                    id="org"
+                    name="account"
+                    value="org"
+                    onChange={() => setUserType('org')}
+                />
+                <label>Organization</label>
+                <br />
+                <br />
+                {err && (
+                    <>
+                        <p>{err}</p>
+                        <br />
+                    </>
+                )}
                 <button onClick={(e) => submit(e)}>Log in</button>
             </form>
         </div>

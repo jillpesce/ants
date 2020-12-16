@@ -40,8 +40,12 @@ const UserContextProvider = (props) => {
                     setUser(account)
                     setUserType(userType)
                     if (redirect) {
-                      if (!account.interests.length && !account.locations.length) router.push('/update')
-                      else router.push('/')
+                        if (
+                            !account.interests.length &&
+                            !account.locations.length
+                        )
+                            router.push('/update')
+                        else router.push('/')
                     }
                 }
             })
@@ -59,7 +63,9 @@ const UserContextProvider = (props) => {
     }
 
     return (
-        <UserContext.Provider value={{ user, userType, updateUser, login, logout }}>
+        <UserContext.Provider
+            value={{ user, userType, updateUser, login, logout }}
+        >
             {props.children}
         </UserContext.Provider>
     )
