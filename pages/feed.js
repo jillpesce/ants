@@ -36,7 +36,7 @@ export default function Feed() {
             <p>Here are posts from the orgs that you follow!</p>
             {posts &&
                 posts.map((post) => (
-                    <Post {...post} org={user} userid={user._id} />
+                    <Post {...post} userid={user._id} />
                 ))}
             {!posts.length && (
                 <p>No posts yet! Go to the home page to follow more orgs.</p>

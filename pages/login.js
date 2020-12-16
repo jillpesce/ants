@@ -11,8 +11,9 @@ export default function Login() {
     const [err, setErr] = useState()
 
     useEffect(() => {
+        console.log(user)
         if (!isEmpty(user)) window.location.assign('/')
-    }, [])
+    }, [user])
 
     async function submit(e) {
         e.preventDefault()
