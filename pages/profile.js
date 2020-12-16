@@ -13,10 +13,13 @@ export default function Profile() {
 
     //get list of orgs
     useEffect(() => {
-      if(isEmpty(user)) return
-      fetch(`http://localhost:5000/orgs/followed/${user.username}`)
-      .then((resp) => resp.json())
-      .then(({ data, err }) => {
+      if(isEmpty(user))  {
+        return;
+      } 
+        console.log('test here' );
+        fetch(`http://localhost:5000/orgs/followed/${user.username}`)
+        .then((resp) => resp.json())
+        .then(({ data, err }) => {
         if (err) {
             console.log('Error getting orgs', err)
         } else {
@@ -55,6 +58,8 @@ export default function Profile() {
       <p>Interests: {user.interests && user.interests.map(i => {
         return <li>{i}</li>
       })}</p>
+      {userType == 'user' &&
+      <div>
       <h2>Organizations you follow:</h2>
       { followedOrgs ? followedOrgs.map((org) => (
         <Org name={org.name}
@@ -63,12 +68,13 @@ export default function Profile() {
           id = {org._id}
           user = {user.username}
           />
-        )) : <p>No recommended orgs at this time</p>
+        )) : <p>No followed orgs at this time</p>
       }
       <h2>Posts you like:</h2>
       {likedPosts ? likedPosts.map((post) => (<Post {...post} org={user} userid={user._id}/>)) : (
         <p>No posts yet! Go to the feed page to see posts from your orgs.</p>
-      )}
+      )}  </div>
+    }
     </div>
   )
 }
