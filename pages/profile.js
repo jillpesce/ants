@@ -3,22 +3,21 @@ import { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../contexts/user-context'
 import { isEmpty } from 'lodash';
 import Org from '../components/Org'
+import Post from '../components/Post'
 
 
 export default function Profile() {
     const { user, userType, logout } = useContext(UserContext)
-    const [followedOrgs, setFollowedOrgsList] = useState([]);
+    const [followedOrgs, setFollowedOrgsList] = useState([])
+    const [likedPosts, setLikedPosts] = useState([])
 
-    //get list of orgs 
+    //get list of orgs
     useEffect(() => {
-      if(isEmpty(user)) {
+      if(isEmpty(user))  {
         return;
-      } else {
-      if (userType == 'user') {
-      console.log("username: " + user.username);
-        const fetchPath = user.username;
-        console.log('fetch path: ' + fetchPath);
-        fetch(`http://localhost:5000/orgs/followed/${fetchPath}`)
+      } 
+        console.log('test here' );
+        fetch(`http://localhost:5000/orgs/followed/${user.username}`)
         .then((resp) => resp.json())
         .then(({ data, err }) => {
         if (err) {
@@ -26,12 +25,25 @@ export default function Profile() {
         } else {
             setFollowedOrgsList(data)
         }
+      })
+      .catch((err) => {
+          console.log('Error getting orgs', err)
+      })
+
+      fetch(`http://localhost:5000/posts/liked/${user._id}`)
+        .then((resp) => resp.json())
+        .then(({ posts, err }) => {
+          if (err) {
+              console.log('Error getting liked posts', err)
+          } else {
+            setLikedPosts(posts)
+          }
         })
         .catch((err) => {
             console.log('Error getting orgs', err)
         })
-      
-      }}}
+
+      }
     , [user])
 
 
@@ -39,7 +51,6 @@ export default function Profile() {
     <div>
       <Header />
       <h1>{user.username} Profile Page</h1>
-      {console.log(user)}
       <p>Username: {user.username}</p>
       <p>Location: {user.locations && user.locations.map(l => {
         return <li>{l}</li>
@@ -50,19 +61,20 @@ export default function Profile() {
       {userType == 'user' ?
       <div>
       <h2>Organizations you follow:</h2>
-      { followedOrgs !== undefined ?
-                followedOrgs.map((org) => {
-                            return <Org name={org.name}
-                                description={org.description}
-                                interests = {org.interests}
-                                id = {org._id}
-                                user = {user.username}
-                            />;
-                        }) : <p>No recommended orgs at this time</p>
-            }
-    <h2>Posts you like:</h2></div> : 
-    <h2>Your Posts:</h2>
-    }
+      { followedOrgs ? followedOrgs.map((org) => (
+        <Org name={org.name}
+          description={org.description}
+          interests = {org.interests}
+          id = {org._id}
+          user = {user.username}
+          />
+        )) : <p>No followed orgs at this time</p>
+      }
+      <h2>Posts you like:</h2>
+      {likedPosts ? likedPosts.map((post) => (<Post {...post} org={user} userid={user._id}/>)) : (
+        <p>No posts yet! Go to the feed page to see posts from your orgs.</p>
+      )}  </div>
+    : <h2>Your Posts:</h2>}
     </div>
   )
 }
