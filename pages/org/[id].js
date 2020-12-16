@@ -37,8 +37,9 @@ export default function Profile() {
 
     useEffect(() => {
         if (isEmpty(user) || isEmpty(org)) return
+        if (userType == 'user') {
         setButtonText(user.following.includes(org._id) ? 'Following' : 'Follow')
-    }, [user, org])
+    }}, [user, org])
 
     useEffect(() => {
         if (isEmpty(router)) return
@@ -108,13 +109,14 @@ export default function Profile() {
             {org && (
                 <div>
                     <h2>{org.name}'s page</h2>
+                    { userType == 'user' && 
                     <button
                         onClick={
                             buttonText == 'Follow' ? followOrg : unfollowOrg
                         }
                     >
                         {buttonText}
-                    </button>
+                    </button>}
                     <p>
                         Location:{' '}
                         {org.locations &&
