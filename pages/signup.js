@@ -69,7 +69,7 @@ export default function Signup() {
     return (
         <div>
             <h1>Sign Up</h1>
-            <a href="/login">Have an account? Log in here.</a>
+            <a href="/login">Already have an account? Log in here.</a>
 
             <h4>For users:</h4>
             <form>

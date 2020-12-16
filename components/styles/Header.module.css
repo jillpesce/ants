@@ -1,0 +1,31 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  background-color: #6B385D;
+  margin: 0;
+  color: white;
+  font-family: monospace;
+}
+
+.headerRight {
+  display: flex;
+  justify-content: space-around;
+  width: 500px;
+}
+
+.ants {
+  font-size: 48pt;
+}
+
+.a {
+  color: white !important;
+  font-size: 12pt
+}
+
+.button {
+  background-color: #6B385D;
+  color: white;
+  border: none;
+  font-size: 12pt
+}

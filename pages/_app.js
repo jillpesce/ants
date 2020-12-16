@@ -1,5 +1,4 @@
-import '../components/styles/Header.css'
-import './styles/Resources.css'
+import './styles/App.css'
 
 import 'bootstrap/dist/css/bootstrap.css'
 
