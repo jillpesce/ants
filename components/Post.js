@@ -57,7 +57,7 @@ const Post = (props) => {
             }),
         })
             .then((response) => response.json())
-            .then(({ err, user }) => {
+            .then(({ err, user, post }) => {
                 if (err) console.log('Error liking post', err)
                 else {
                     updateUser(user)

@@ -12,8 +12,6 @@ export default function Profile() {
     const [posts, setPosts] = useState([])
     const [buttonText, setButtonText] = useState(['Follow'])
     const router = useRouter()
-    console.log(router)
-    console.log('org id: ' + router.query.id)
 
     //get list of orgs
     useEffect(() => {
@@ -25,9 +23,7 @@ export default function Profile() {
                 if (err) {
                     console.log('Error getting orgs', err)
                 } else {
-                    console.log(account)
                     setOrg(account)
-                    console.log('ORG: ' + org)
                 }
             })
             .catch((err) => {
@@ -52,7 +48,6 @@ export default function Profile() {
                 if (err) {
                     console.log('Error getting posts', err)
                 } else {
-                    console.log('POSTS: ' + posts)
                     setPosts(posts)
                 }
             })

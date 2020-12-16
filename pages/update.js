@@ -43,7 +43,6 @@ export default function Update() {
         if (!locations.length && !interests.length) {
             setErr('Please select interests or locations')
         } else {
-            console.log()
             fetch(`http://localhost:5000/${userType}s/update/${user._id}`, {
                 method: 'POST',
                 headers: {

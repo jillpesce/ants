@@ -15,7 +15,7 @@ export default function Profile() {
         if (isEmpty(user)) {
             return
         }
-        console.log('test here')
+
         fetch(`http://localhost:5000/orgs/followed/${user.username}`)
             .then((resp) => resp.json())
             .then(({ data, err }) => {
