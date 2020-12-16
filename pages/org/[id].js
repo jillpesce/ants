@@ -43,8 +43,8 @@ export default function Profile() {
 
     useEffect(() => {
       if(isEmpty(user) || isEmpty(org)) return
-        setButtonText(user.following.includes(org.id) ? 'Following' : 'Follow')
-      }, [user])
+        setButtonText(user.following.includes(org._id) ? 'Following' : 'Follow')
+      }, [user, org])
 
     useEffect(() => {
         if (isEmpty(router)) return 
