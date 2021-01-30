@@ -1,17 +1,23 @@
 {
-  "name": "with-mongodb",
-  "version": "0.1.0",
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
-  "dependencies": {
-    "lodash": "^4.17.20",
-    "mongodb": "^3.6.3",
-    "next": "latest",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
-  },
-  "license": "MIT"
+    "name": "Ants",
+    "version": "0.1.0",
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start -p $PORT",
+        "heroku-postbuild": "npm run build"
+    },
+    "dependencies": {
+        "bootstrap": "^4.5.3",
+        "lodash": "^4.17.20",
+        "next": "latest",
+        "next-images": "^1.6.2",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1"
+    },
+    "devDependencies": {
+        "file-loader": "^6.2.0",
+        "prettier": "2.2.1",
+        "url-loader": "^4.1.1"
+    }
 }

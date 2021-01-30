@@ -1,8 +1,1 @@
-const locations = [
-    "PHIlADELPHIA",
-    "DC",
-    "NYC",
-    "BOSTON",
-];
-
-export { locations };
+export default ['PHILADELPHIA', 'DC', 'NYC', 'BOSTON']

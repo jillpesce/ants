@@ -1,10 +1,84 @@
-import { Card, Button, Input } from "react";
+import { useState, useEffect, useContext } from 'react'
+import { UserContext } from '../contexts/user-context'
+import { isEmpty } from 'lodash'
 
-const Org = (org) => {
-    return (<Card>
-        <Card.Title>{org.name}</Card.Title>
-        <Button>Follow</Button>
-    </Card>);
+const Org = (props) => {
+    const [buttonText, setButtonText] = useState()
+    const { user, updateUser } = useContext(UserContext)
+
+    useEffect(() => {
+        if (isEmpty(user)) return
+        setButtonText(
+            user.following.includes(props.id) ? 'Following' : 'Follow'
+        )
+    }, [user])
+
+    //follow org
+    const followOrg = () => {
+        let username = props.user
+        let orgID = props.id
+        fetch('https://ants-senior-design.herokuapp.com/users/followOrg', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                username,
+                orgID,
+            }),
+        })
+            .then((response) => response.text())
+            .then((data) => {
+                console.log(data)
+            })
+
+        setButtonText('Following')
+    }
+
+    //unfollow org
+    const unfollowOrg = () => {
+        let username = props.user
+        let orgID = props.id
+        fetch('https://ants-senior-design.herokuapp.com/users/unfollowOrg', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                username,
+                orgID,
+            }),
+        })
+            .then((response) => response.text())
+            .then((data) => {
+                console.log(data)
+            })
+
+        setButtonText('Follow')
+    }
+
+    return (
+        <div className="card">
+            <div className="card-body">
+                <h5>
+                    <a href={`/org/${encodeURIComponent(props.id)}`}>
+                        {props.name}
+                    </a>
+                </h5>
+                <h6 className="card-subtitle mb-2 text-muted">
+                    {props.interests.map((i) => {
+                        return <li>{i}</li>
+                    })}
+                </h6>
+                <p className="card-text">Description: {props.description}</p>
+                <button
+                    onClick={buttonText == 'Follow' ? followOrg : unfollowOrg}
+                >
+                    {buttonText}
+                </button>
+            </div>
+        </div>
+    )
 }
 
-export default Org;
+export default Org

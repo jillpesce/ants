@@ -26,12 +26,12 @@ const UserContextProvider = (props) => {
         setUser(u)
     }
 
-    async function login(userType, uid) {
+    async function login(userType, uid, redirect) {
         if (user && user._id === uid) return
         localStorage.setItem('uid', uid)
         localStorage.setItem('utype', userType)
         const fetchPath = userType == 'user' ? `users/${uid}` : `orgs/${uid}`
-        await fetch(`http://localhost:5000/${fetchPath}`)
+        await fetch(`https://ants-senior-design.herokuapp.com/${fetchPath}`)
             .then((resp) => resp.json())
             .then(({ account, err }) => {
                 if (err) {
@@ -39,7 +39,14 @@ const UserContextProvider = (props) => {
                 } else {
                     setUser(account)
                     setUserType(userType)
-                    router.push('/')
+                    if (redirect) {
+                        if (
+                            !account.interests.length &&
+                            !account.locations.length
+                        )
+                            router.push('/update')
+                        else router.push('/')
+                    }
                 }
             })
             .catch((err) => {
@@ -56,7 +63,9 @@ const UserContextProvider = (props) => {
     }
 
     return (
-        <UserContext.Provider value={{ user, userType, updateUser, login, logout }}>
+        <UserContext.Provider
+            value={{ user, userType, updateUser, login, logout }}
+        >
             {props.children}
         </UserContext.Provider>
     )
