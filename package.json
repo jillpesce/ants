@@ -10,9 +10,12 @@
     "dependencies": {
         "bootstrap": "^4.5.3",
         "lodash": "^4.17.20",
+        "moment": "^2.29.1",
         "next": "latest",
         "next-images": "^1.6.2",
         "react": "^16.13.1",
+        "react-big-calendar": "^0.31.0",
+        "react-datepicker": "^3.4.1",
         "react-dom": "^16.13.1"
     },
     "devDependencies": {

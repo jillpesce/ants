@@ -5,6 +5,11 @@ import Org from '../components/Org'
 import Header from '../components/Header'
 import Post from '../components/Post'
 import CreatePost from '../components/CreatePost'
+import { Calendar, momentLocalizer } from 'react-big-calendar'
+import moment from 'moment'
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+
+const localizer = momentLocalizer(moment)
 
 export default function Home() {
     const { user, userType } = useContext(UserContext)
@@ -52,7 +57,6 @@ export default function Home() {
             })
     }
 
-    if (!user) return <div />
 
     useEffect(() => {
         fetch(`http://localhost:5000/orgs/getOrgs`, {
@@ -68,6 +72,8 @@ export default function Home() {
     
         });
     }, [])
+
+    if (!user) return <div />
 
     return (
         <div>
@@ -100,6 +106,15 @@ export default function Home() {
             ) : (
                 <div>
                     <p>This is an org page</p>
+                    <div>
+    <Calendar
+      localizer={localizer}
+      events={[]}
+      startAccessor="start"
+      endAccessor="end"
+      style={{ height: 800 }}
+    />
+  </div>
                     <button onClick={() => setCreate(true)}>
                         Create a Post
                     </button>
