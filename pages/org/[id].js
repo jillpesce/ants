@@ -5,6 +5,12 @@ import isEmpty from 'lodash/isEmpty'
 import Post from '../../components/Post'
 import Header from '../../components/Header'
 import { useRouter } from 'next/router'
+import { Calendar, momentLocalizer } from 'react-big-calendar'
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+import moment from 'moment'
+
+const localizer = momentLocalizer(moment)
+
 
 export default function Profile() {
     const { user, userType, logout } = useContext(UserContext)
@@ -12,8 +18,9 @@ export default function Profile() {
     const [posts, setPosts] = useState([])
     const [buttonText, setButtonText] = useState(['Follow'])
     const router = useRouter()
+    const [events, setEvents] = useState([]);
 
-    //get list of orgs
+    //get org
     useEffect(() => {
         //get id from url
         if (router.query.id == undefined) return
@@ -57,6 +64,13 @@ export default function Profile() {
                     console.log('Error getting posts', err)
                 } else {
                     setPosts(posts)
+                    const tempEvents = [];
+
+                    posts.forEach(function(p) {
+                        tempEvents.push({ start: new Date(p.startDate), end: new Date(p.endDate), title: p.title })
+                    });
+
+                    setEvents(tempEvents);
                 }
             })
             .catch((err) => {
@@ -125,6 +139,8 @@ export default function Profile() {
                             {buttonText}
                         </button>
                     )}
+                    <br></br>
+                    <br></br>
                     <p>
                         Location:{' '}
                         {org.locations &&
@@ -140,13 +156,25 @@ export default function Profile() {
                             })}
                     </p>
                     <h2> Posts </h2>
+                    {!posts.length && <p>No posts yet</p>}
+
                     {posts &&
                         posts.map((post) => (
                             <Post {...post} org={org} userid={user._id} />
                         ))}
+
+                    <div>
+                    <h2>Upcoming Events:</h2>
+                    <Calendar
+                    localizer={localizer}
+                    events={events}
+                    startAccessor="start"
+                    endAccessor="end"
+                    style={{ height: 1000 }}
+                />
+                </div>
                 </div>
             )}
-            {!posts.length && <p>No posts yet</p>}
         </div>
     )
 }

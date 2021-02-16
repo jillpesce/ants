@@ -52,8 +52,8 @@ export default function CreatePost(props) {
                 .then((resp) => resp.json())
                 .then(({ err, post }) => {
                     if (err) {
+                        console.log(post);
                         console.log('Error creating post', err)
-                        setErr(err)
                     } else {
                         setErr('')
                         setSuccess('Successfully created post!')

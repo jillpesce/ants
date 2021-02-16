@@ -43,7 +43,7 @@ export default function Profile() {
                 }
             })
             .catch((err) => {
-                console.log('Error getting orgs', err)
+                console.log('Error getting posts', err)
             })
     }, [user])
 

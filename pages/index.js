@@ -9,6 +9,7 @@ import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
+
 const localizer = momentLocalizer(moment)
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
     const [likedPosts, setLikedPosts] = useState([])
     const [posts, setPosts] = useState([])
     const [create, setCreate] = useState()
+    const [events, setEvents] = useState([])
 
     //get orgs
     useEffect(() => {
@@ -28,15 +30,57 @@ export default function Home() {
                         console.log('Error getting orgs', err)
                     } else {
                         setOrgsList(data)
+                        console.log('orgs');
+                        console.log(orgs);
                     }
                 })
                 .catch((err) => {
                     console.log('Error getting orgs', err)
                 })
+
         } else if (userType && userType == 'org') {
             fetchPosts()
         }
     }, [userType])
+
+    useEffect(() => {
+        if (userType && userType == 'user') {
+            fetch(
+                `https://ants-senior-design.herokuapp.com/posts/liked/${user._id}`
+            )
+                .then((resp) => resp.json())
+                .then(({ posts, err }) => {
+                    if (err) {
+                        console.log('Error getting liked posts', err)
+                    } else {
+                        console.log(posts);
+                        setLikedPosts(posts, console.log(likedPosts))
+                        const tempEvents = [];
+
+                        likedPosts.forEach(function(p) {
+                            tempEvents.push({ start: new Date(p.startDate), end: new Date(p.endDate), title: p.title })
+                        });
+
+                        setEvents(tempEvents);
+                    }
+                })
+                .catch((err) => {
+                    console.log('Error getting posts', err)
+                })
+        }
+    }, [userType])
+
+    useEffect(() => {
+        if (userType && userType == 'user') {
+                        const tempEvents = [];
+           
+                        likedPosts.forEach(function(p) {
+                            tempEvents.push({ start: new Date(p.startDate), end: new Date(p.endDate), title: p.title })
+                        });
+
+                        setEvents(tempEvents);
+                    }
+    }, [likedPosts])
 
     useEffect(() => {
         if (!user) window.location.assign('/login')
@@ -50,6 +94,16 @@ export default function Home() {
                     console.log('Error getting posts', err)
                 } else {
                     setPosts(posts)
+
+                    const tempEvents = [];
+
+                    posts.forEach(function(p) {
+                        tempEvents.push({ start: new Date(p.startDate), end: new Date(p.endDate), title: p.title })
+                    });
+
+                    console.log(tempEvents);
+
+                    setEvents(tempEvents);
                 }
             })
             .catch((err) => {
@@ -86,6 +140,21 @@ export default function Home() {
             {userType == 'user' ? (
                 <div>
                     <hr></hr>
+                    { events !== undefined && 
+                    <div style={{ minHeight: '500px' }}
+>
+
+                    <h2>Your Upcoming Events:</h2>
+                        <Calendar
+                        localizer={localizer}
+                        events={events}
+                        startAccessor="start"
+                        endAccessor="end"
+                        style={{ height: '1000px' }}
+                        />
+                    
+                </div>
+                    }
                     <h2>Recommended Orgs For You:</h2>
                     {orgs !== undefined ? (
                         orgs.map((org) => {
@@ -107,14 +176,14 @@ export default function Home() {
                 <div>
                     <p>This is an org page</p>
                     <div>
-    <Calendar
-      localizer={localizer}
-      events={[]}
-      startAccessor="start"
-      endAccessor="end"
-      style={{ height: 800 }}
-    />
-  </div>
+                <Calendar
+                    localizer={localizer}
+                    events={events}
+                    startAccessor="start"
+                    endAccessor="end"
+                    style={{ height: 800 }}
+                />
+                </div>
                     <button onClick={() => setCreate(true)}>
                         Create a Post
                     </button>
