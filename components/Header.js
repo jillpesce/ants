@@ -11,11 +11,9 @@ export default function Header(props) {
                 <a className={styles.a} href="/">
                     Home
                 </a>
-                {userType == 'user' && (
-                    <a className={styles.a} href="/profile">
-                        Profile
-                    </a>
-                )}
+                <a className={styles.a} href="/profile">
+                    Profile
+                </a>
                 <a className={styles.a} href="/update">
                     Update
                 </a>

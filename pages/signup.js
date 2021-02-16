@@ -6,6 +6,7 @@ export default function Signup() {
     const { user, login } = useContext(UserContext)
     const [username, setUsername] = useState()
     const [password, setPassword] = useState()
+    const [link, setLink] = useState()
     const [name, setName] = useState()
     const [err, setErr] = useState()
 
@@ -46,6 +47,8 @@ export default function Signup() {
             setErr('Please enter a username')
         } else if (!password) {
             setErr('Please enter a password')
+        } else if (!link) {
+            setErr('Please enter a website')
         } else {
             const resp = await fetch(
                 'https://ants-senior-design.herokuapp.com/auth/signup',
@@ -59,6 +62,7 @@ export default function Signup() {
                         username,
                         password,
                         userType: 'org',
+                        link 
                     }),
                 }
             )
@@ -112,6 +116,12 @@ export default function Signup() {
                 <input
                     type="password"
                     onChange={(e) => setPassword(e.target.value)}
+                ></input>
+                <br></br>
+                <label>Website:</label>
+                <input
+                    type="text"
+                    onChange={(e) => setLink(e.target.value)}
                 ></input>
                 <br></br>
                 <button onClick={(e) => signupOrg(e)}>Sign up</button>

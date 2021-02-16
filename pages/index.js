@@ -89,6 +89,7 @@ export default function Home() {
                                     description={org.description}
                                     interests={org.interests}
                                     id={org._id}
+                                    link={org.link}
                                     user={user.username}
                                 />
                             )
