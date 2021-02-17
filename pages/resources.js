@@ -1,5 +1,4 @@
 import Header from '../components/Header'
-import styles from './styles/Resources.module.css'
 
 export default function Resources() {
     return (
@@ -26,18 +25,13 @@ export default function Resources() {
                     <li className="list-group-item">
                         <a
                             target="_blank"
-                            className={styles.a}
                             href="https://www.aclunc.org/our-work/know-your-rights/know-your-rights-free-speech-protests-demonstrations"
                         >
                             Know Your Rights
                         </a>
                     </li>
                     <li className="list-group-item">
-                        <a
-                            target="_blank"
-                            className={styles.a}
-                            href="https://www.nlg.org/"
-                        >
+                        <a target="_blank" href="https://www.nlg.org/">
                             {' '}
                             National Lawyer's Guild
                         </a>
@@ -45,7 +39,6 @@ export default function Resources() {
                     <li className="list-group-item">
                         <a
                             target="_blank"
-                            className={styles.a}
                             href="https://www.amnestyusa.org/pdfs/SafeyDuringProtest_F.pdf"
                         >
                             {' '}

@@ -53,5 +53,30 @@
         &:hover {
             background-color: scale-color($ants-yellow, $lightness: -15%);
         }
+
+        &.is-outlined {
+            background-color: transparent;
+            color: scale-color($ants-yellow, $lightness: 25%);
+            transform: scale(0.9);
+            border-width: 2px;
+            border: 2px solid scale-color($ants-yellow, $lightness: 18%);
+            font-weight: bold;
+        }
     }
+}
+
+.ants {
+    font-size: 48px;
+    font-weight: 900;
+    color: $ants-white;
+    text-shadow: 3px 3px scale-color($ants-yellow, $lightness: -10%);
+}
+
+.ants-yellow {
+    @extend .ants;
+    text-shadow: 3px 3px scale-color($ants-purple-1);
+}
+
+* {
+    font-family: 'Noto Sans JP', sans-serif !important;
 }

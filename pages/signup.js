@@ -86,7 +86,7 @@ export default function Signup() {
     return (
         <div className="signup">
             <div className="signup-left">
-                <h1 className="ants">Join the march.</h1>
+                <h1 className="ants-yellow">Join the march.</h1>
             </div>
             <div className="signup-right">
                 <form>

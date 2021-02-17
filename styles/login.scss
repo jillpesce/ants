@@ -14,21 +14,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
-
-        .ants {
-            font-size: 48pt;
-            font-family: 'Noto Sans JP', sans-serif;
-            color: $ants-white;
-            text-shadow: 3px 3px scale-color($ants-yellow, $lightness: -10%);
-        }
     }
 
     .signup-left {
         @extend .login-left;
         background-color: $ants-yellow;
-        .ants {
-            text-shadow: 3px 3px scale-color($ants-purple-1);
-        }
     }
 
     .login-right,

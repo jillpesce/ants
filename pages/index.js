@@ -7,8 +7,7 @@ import Post from '../components/Post'
 import CreatePost from '../components/CreatePost'
 import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
-import 'react-big-calendar/lib/css/react-big-calendar.css';
-
+import 'react-big-calendar/lib/css/react-big-calendar.css'
 
 const localizer = momentLocalizer(moment)
 
@@ -30,14 +29,13 @@ export default function Home() {
                         console.log('Error getting orgs', err)
                     } else {
                         setOrgsList(data)
-                        console.log('orgs');
-                        console.log(orgs);
+                        console.log('orgs')
+                        console.log(orgs)
                     }
                 })
                 .catch((err) => {
                     console.log('Error getting orgs', err)
                 })
-
         } else if (userType && userType == 'org') {
             fetchPosts()
         }
@@ -53,15 +51,19 @@ export default function Home() {
                     if (err) {
                         console.log('Error getting liked posts', err)
                     } else {
-                        console.log(posts);
+                        console.log(posts)
                         setLikedPosts(posts, console.log(likedPosts))
-                        const tempEvents = [];
+                        const tempEvents = []
 
-                        likedPosts.forEach(function(p) {
-                            tempEvents.push({ start: new Date(p.startDate), end: new Date(p.endDate), title: p.title })
-                        });
+                        likedPosts.forEach(function (p) {
+                            tempEvents.push({
+                                start: new Date(p.startDate),
+                                end: new Date(p.endDate),
+                                title: p.title,
+                            })
+                        })
 
-                        setEvents(tempEvents);
+                        setEvents(tempEvents)
                     }
                 })
                 .catch((err) => {
@@ -72,14 +74,18 @@ export default function Home() {
 
     useEffect(() => {
         if (userType && userType == 'user') {
-                        const tempEvents = [];
+            const tempEvents = []
 
-                        likedPosts.forEach(function(p) {
-                            tempEvents.push({ start: new Date(p.startDate), end: new Date(p.endDate), title: p.title })
-                        });
+            likedPosts.forEach(function (p) {
+                tempEvents.push({
+                    start: new Date(p.startDate),
+                    end: new Date(p.endDate),
+                    title: p.title,
+                })
+            })
 
-                        setEvents(tempEvents);
-                    }
+            setEvents(tempEvents)
+        }
     }, [likedPosts])
 
     useEffect(() => {
@@ -95,15 +101,19 @@ export default function Home() {
                 } else {
                     setPosts(posts)
 
-                    const tempEvents = [];
+                    const tempEvents = []
 
-                    posts.forEach(function(p) {
-                        tempEvents.push({ start: new Date(p.startDate), end: new Date(p.endDate), title: p.title })
-                    });
+                    posts.forEach(function (p) {
+                        tempEvents.push({
+                            start: new Date(p.startDate),
+                            end: new Date(p.endDate),
+                            title: p.title,
+                        })
+                    })
 
-                    console.log(tempEvents);
+                    console.log(tempEvents)
 
-                    setEvents(tempEvents);
+                    setEvents(tempEvents)
                 }
             })
             .catch((err) => {
@@ -138,21 +148,18 @@ export default function Home() {
             {userType == 'user' ? (
                 <div>
                     <hr></hr>
-                    { events !== undefined &&
-                    <div style={{ minHeight: '500px' }}
->
-
-                    <h2>Your Upcoming Events:</h2>
-                        <Calendar
-                        localizer={localizer}
-                        events={events}
-                        startAccessor="start"
-                        endAccessor="end"
-                        style={{ height: '1000px' }}
-                        />
-
-                </div>
-                    }
+                    {events !== undefined && (
+                        <div style={{ minHeight: '500px' }}>
+                            <h2>Your Upcoming Events:</h2>
+                            <Calendar
+                                localizer={localizer}
+                                events={events}
+                                startAccessor="start"
+                                endAccessor="end"
+                                style={{ height: '1000px' }}
+                            />
+                        </div>
+                    )}
                     <h2>Recommended Orgs For You:</h2>
                     {orgs !== undefined ? (
                         orgs.map((org) => {
@@ -174,14 +181,14 @@ export default function Home() {
                 <div>
                     <p>This is an org page</p>
                     <div>
-                <Calendar
-                    localizer={localizer}
-                    events={events}
-                    startAccessor="start"
-                    endAccessor="end"
-                    style={{ height: 800 }}
-                />
-                </div>
+                        <Calendar
+                            localizer={localizer}
+                            events={events}
+                            startAccessor="start"
+                            endAccessor="end"
+                            style={{ height: 800 }}
+                        />
+                    </div>
                     <button onClick={() => setCreate(true)}>
                         Create a Post
                     </button>

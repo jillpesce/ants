@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import locationsList from '../constants/locations'
 import typeList from '../constants/types'
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 export default function CreatePost(props) {
     const { orgid, close, create } = props
@@ -18,7 +17,6 @@ export default function CreatePost(props) {
     const [startDate, setStartDate] = useState()
     const [endDate, setEndDate] = useState()
     const [allDay, setAllDay] = useState()
-
 
     function post(e) {
         e.preventDefault()
@@ -43,16 +41,16 @@ export default function CreatePost(props) {
                     type,
                     orgid,
                     information,
-                    link, 
+                    link,
                     startDate,
-                    endDate, 
-                    allDay
+                    endDate,
+                    allDay,
                 }),
             })
                 .then((resp) => resp.json())
                 .then(({ err, post }) => {
                     if (err) {
-                        console.log(post);
+                        console.log(post)
                         console.log('Error creating post', err)
                     } else {
                         setErr('')
@@ -119,23 +117,31 @@ export default function CreatePost(props) {
                         </div>
 
                         <label>Start Date:</label>
-                        <DatePicker showTimeSelect selected={startDate} onChange={date => setStartDate(date)} />
+                        <DatePicker
+                            showTimeSelect
+                            selected={startDate}
+                            onChange={(date) => setStartDate(date)}
+                        />
                         <br></br>
                         <label>End Date:</label>
-                        <DatePicker showTimeSelect selected={endDate} onChange={date => setEndDate(date)} />
+                        <DatePicker
+                            showTimeSelect
+                            selected={endDate}
+                            onChange={(date) => setEndDate(date)}
+                        />
                         <br></br>
 
                         <label>All Day Event?</label>
                         <input
-                                    type="radio"
-                                    name="type"
-                                    onChange={() => setAllDay(true)}
+                            type="radio"
+                            name="type"
+                            onChange={() => setAllDay(true)}
                         />
                         <label>Yes</label>
                         <input
-                                    type="radio"
-                                    name="type"
-                                    onChange={() => setAllDay(false)}
+                            type="radio"
+                            name="type"
+                            onChange={() => setAllDay(false)}
                         />
                         <label>No</label>
 
@@ -155,7 +161,7 @@ export default function CreatePost(props) {
                             type="text"
                             onChange={(e) => setLink(e.target.value)}
                         ></input>
-                        <br/>
+                        <br />
                         {err && <p>{err}</p>}
                         <button onClick={(e) => post(e)}>Post</button>
                         <button

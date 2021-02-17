@@ -1,0 +1,37 @@
+@import '../../styles/colors.scss';
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    background-color: $ants-purple-1;
+    padding: 0px 30px 10px 30px;
+
+    .ants {
+        font-size: 36pt;
+        text-shadow: 2.5px 2.5px scale-color($ants-yellow, $lightness: -10%);
+    }
+
+    .headerRight {
+        display: flex;
+        justify-content: space-around;
+        align-items: baseline;
+        font-weight: 500;
+        color: $ants-white;
+        font-size: 16px;
+
+        a {
+            margin: 0px 12px;
+            color: inherit;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        button {
+            transform: scale(0.9);
+            margin-left: 15px;
+        }
+    }
+}
