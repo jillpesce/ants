@@ -1,0 +1,57 @@
+.card {
+    width: 40%;
+    display: inline-block !important;
+    margin: 2.5%;
+}
+
+.card-img-top {
+    margin: 0;
+}
+
+.error {
+    color: $ants-gray-2;
+    background-color: $ants-gray-3;
+    border-radius: 4px;
+    padding: 3px 8px;
+    font-size: 14px;
+    margin: 15px 0px;
+}
+
+.button {
+    &.dark {
+        background-color: $ants-black !important;
+        color: $ants-white !important;
+        border: none;
+        outline: none;
+
+        &:hover {
+            background-color: scale-color(
+                $ants-black,
+                $lightness: -10%
+            ) !important;
+        }
+    }
+
+    &.purple {
+        background-color: scale-color($ants-purple-1, $lightness: 10%);
+        color: $ants-white;
+        outline: none;
+        font-weight: 500;
+
+        &:hover {
+            background-color: $ants-purple-1;
+        }
+    }
+
+    &.yellow {
+        background-color: scale-color($ants-yellow, $lightness: -10%);
+        color: $ants-white;
+        border: 1px solid scale-color($ants-yellow, $lightness: -15%);
+        outline: none;
+        font-weight: 500;
+
+        &:hover {
+            background-color: scale-color($ants-yellow, $lightness: -15%);
+        }
+    }
+}

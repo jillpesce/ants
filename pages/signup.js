@@ -6,35 +6,46 @@ export default function Signup() {
     const { user, login } = useContext(UserContext)
     const [username, setUsername] = useState()
     const [password, setPassword] = useState()
-    const [name, setName] = useState()
+    const [confirmPassword, setConfirmPassword] = useState()
+    const [userType, setUserType] = useState()
     const [err, setErr] = useState()
 
     useEffect(() => {
         if (!isEmpty(user)) window.location.assign('/')
     }, [])
 
-    async function signupUser(e) {
+    async function submit(e) {
         e.preventDefault()
-        const resp = await fetch(
-            'https://ants-senior-design.herokuapp.com/auth/signup',
-            {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username,
-                    password,
-                    userType: 'user',
-                }),
-            }
-        )
-        const { account, err } = await resp.json()
-        if (err) {
-            setErr(err.message)
-            console.log('Error signing up', err)
+        if (!username) {
+            setErr('Please enter a username')
+        } else if (!password) {
+            setErr('Please enter a password')
+        } else if (!userType) {
+            setErr('Please choose account type')
+        } else if (password !== confirmPassword) {
+            setErr('Passwords do not match')
         } else {
-            login('user', account._id, true)
+            const resp = await fetch(
+                'https://ants-senior-design.herokuapp.com/auth/signup',
+                {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username,
+                        password,
+                        userType: 'user',
+                    }),
+                }
+            )
+            const { account, err } = await resp.json()
+            if (err) {
+                setErr(err.message)
+                console.log('Error signing up', err)
+            } else {
+                login('user', account._id, true)
+            }
         }
     }
 
@@ -73,51 +84,90 @@ export default function Signup() {
     }
 
     return (
-        <div>
-            <h1>Sign Up</h1>
-            <a href="/login">Already have an account? Log in here.</a>
+        <div className="signup">
+            <div className="signup-left">
+                <h1 className="ants">Join the march.</h1>
+            </div>
+            <div className="signup-right">
+                <form>
+                    <div className="field">
+                        <label className="label">Username:</label>
+                        <input
+                            className="input"
+                            type="text"
+                            onChange={(e) => {
+                                setErr('')
+                                setUsername(e.target.value)
+                            }}
+                        ></input>
+                    </div>
 
-            <h4>For users:</h4>
-            <form>
-                <label>Username:</label>
-                <input
-                    type="text"
-                    onChange={(e) => setUsername(e.target.value)}
-                ></input>
-                <br></br>
-                <label>Password:</label>
-                <input
-                    type="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                ></input>
-                <br></br>
-                <button onClick={(e) => signupUser(e)}>Sign up</button>
-            </form>
+                    <div className="field">
+                        <label className="label">Password:</label>
+                        <input
+                            className="input"
+                            type="password"
+                            onChange={(e) => {
+                                setErr('')
+                                setPassword(e.target.value)
+                            }}
+                        ></input>
+                    </div>
+                    <div className="field">
+                        <label className="label">Confirm Password:</label>
+                        <input
+                            className="input"
+                            type="password"
+                            onChange={(e) => {
+                                setErr('')
+                                setConfirmPassword(e.target.value)
+                            }}
+                        ></input>
+                    </div>
 
-            <h4>For orgs:</h4>
-            <form>
-                <label>Name:</label>
-                <input
-                    type="text"
-                    onChange={(e) => setName(e.target.value)}
-                ></input>
-                <br></br>
-                <label>Username:</label>
-                <input
-                    type="text"
-                    onChange={(e) => setUsername(e.target.value)}
-                ></input>
-                <br></br>
-                <label>Password:</label>
-                <input
-                    type="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                ></input>
-                <br></br>
-                <button onClick={(e) => signupOrg(e)}>Sign up</button>
-            </form>
+                    <label className="label">Account Type</label>
+                    <div class="buttons has-addons">
+                        <button
+                            class={
+                                userType === 'user'
+                                    ? 'button yellow is-small'
+                                    : 'button is-small'
+                            }
+                            onClick={(e) => {
+                                e.preventDefault()
+                                setErr('')
+                                setUserType('user')
+                            }}
+                        >
+                            Volunteer
+                        </button>
+                        <button
+                            class={
+                                userType === 'org'
+                                    ? 'button yellow is-small'
+                                    : 'button is-small'
+                            }
+                            onClick={(e) => {
+                                e.preventDefault()
+                                setErr('')
+                                setUserType('org')
+                            }}
+                        >
+                            Organization
+                        </button>
+                    </div>
 
-            {err && <p>{err}</p>}
+                    {err && <p className="error">{err}</p>}
+
+                    <button
+                        className="button yellow is-rounded"
+                        onClick={submit}
+                    >
+                        Sign up
+                    </button>
+                    <a href="/login">Already have an account? Log in here.</a>
+                </form>
+            </div>
         </div>
     )
 }

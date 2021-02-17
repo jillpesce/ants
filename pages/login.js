@@ -1,7 +1,6 @@
 import { UserContext } from '../contexts/user-context'
 import { useContext, useEffect, useState } from 'react'
 import isEmpty from 'lodash/isEmpty'
-import styles from './styles/Login.module.css'
 
 export default function Login() {
     const { user, login } = useContext(UserContext)
@@ -48,56 +47,79 @@ export default function Login() {
     }
 
     return (
-        <div>
-            <h1 className={styles.ants}>Welcome to Ants!</h1>
-            <h3>Log In</h3>
-            <a href="/signup">Don't have an account? Sign up here.</a>
-            <br />
-            <br />
-            <form>
-                <label>Username:</label>
-                <input
-                    type="text"
-                    onChange={(e) => setUsername(e.target.value)}
-                ></input>
-                <br />
-                <br />
-                <label>Password:</label>
-                <input
-                    type="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                ></input>
-                <br />
-                <br />
-                <label>Account Type</label>
-                <br />
-                <input
-                    type="radio"
-                    id="user"
-                    name="account"
-                    value="user"
-                    onChange={() => setUserType('user')}
-                />
-                <label>User</label>
-                <br />
-                <input
-                    type="radio"
-                    id="org"
-                    name="account"
-                    value="org"
-                    onChange={() => setUserType('org')}
-                />
-                <label>Organization</label>
-                <br />
-                <br />
-                {err && (
-                    <>
-                        <p>{err}</p>
-                        <br />
-                    </>
-                )}
-                <button onClick={(e) => submit(e)}>Log in</button>
-            </form>
+        <div className="login">
+            <div className="login-left">
+                <h1 className="ants">Welcome, Ant.</h1>
+            </div>
+            <div className="login-right">
+                <form>
+                    <div className="field">
+                        <label className="label">Username:</label>
+                        <input
+                            className="input"
+                            type="text"
+                            onChange={(e) => {
+                                setErr('')
+                                setUsername(e.target.value)
+                            }}
+                        ></input>
+                    </div>
+
+                    <div className="field">
+                        <label className="label">Password:</label>
+                        <input
+                            className="input"
+                            type="password"
+                            onChange={(e) => {
+                                setErr('')
+                                setPassword(e.target.value)
+                            }}
+                        ></input>
+                    </div>
+
+                    <label className="label">Account Type</label>
+                    <div class="buttons has-addons">
+                        <button
+                            class={
+                                userType === 'user'
+                                    ? 'button yellow is-small'
+                                    : 'button is-small'
+                            }
+                            onClick={(e) => {
+                                e.preventDefault()
+                                setErr('')
+                                setUserType('user')
+                            }}
+                        >
+                            Volunteer
+                        </button>
+                        <button
+                            class={
+                                userType === 'org'
+                                    ? 'button yellow is-small'
+                                    : 'button is-small'
+                            }
+                            onClick={(e) => {
+                                e.preventDefault()
+                                setErr('')
+                                setUserType('org')
+                            }}
+                        >
+                            Organization
+                        </button>
+                    </div>
+
+                    {err && <p className="error">{err}</p>}
+
+                    <button
+                        className="button purple is-rounded"
+                        onClick={submit}
+                    >
+                        Log in
+                    </button>
+                    <a href="/signup">Don't have an account? Sign up here.</a>
+                </form>
+            </div>
         </div>
     )
 }

@@ -52,22 +52,21 @@ export default function Home() {
             })
     }
 
-    if (!user) return <div />
-
     useEffect(() => {
         fetch(`http://localhost:5000/orgs/getOrgs`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-            }
+            },
         })
-        .then((response) => response.text())
-        .then((data) => {            
-            var orgRes = JSON.parse(data);
-            setOrgsList(orgRes.content);
-    
-        });
+            .then((response) => response.text())
+            .then((data) => {
+                var orgRes = JSON.parse(data)
+                setOrgsList(orgRes.content)
+            })
     }, [])
+
+    if (!user) return <div />
 
     return (
         <div>

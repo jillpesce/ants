@@ -1,0 +1,63 @@
+@import './colors.scss';
+
+.login,
+.signup {
+    height: 100vh;
+    width: 100vw;
+    color: white;
+    display: flex;
+
+    .login-left {
+        background-color: $ants-purple-1;
+        height: 100%;
+        width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .ants {
+            font-size: 48pt;
+            font-family: 'Noto Sans JP', sans-serif;
+            color: $ants-white;
+            text-shadow: 3px 3px scale-color($ants-yellow, $lightness: -10%);
+        }
+    }
+
+    .signup-left {
+        @extend .login-left;
+        background-color: $ants-yellow;
+        .ants {
+            text-shadow: 3px 3px scale-color($ants-purple-1);
+        }
+    }
+
+    .login-right,
+    .signup-right {
+        background-color: $ants-white;
+        width: 50%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #777;
+
+        .label {
+            color: $ants-black !important;
+        }
+
+        a {
+            display: block;
+            color: $ants-black;
+            font-size: 12px;
+            margin: 15px 0px;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    label {
+        display: block;
+    }
+}
