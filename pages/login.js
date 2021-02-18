@@ -78,9 +78,9 @@ export default function Login() {
                     </div>
 
                     <label className="label">Account Type</label>
-                    <div class="buttons has-addons">
+                    <div className="buttons has-addons">
                         <button
-                            class={
+                            className={
                                 userType === 'user'
                                     ? 'button yellow is-small'
                                     : 'button is-small'
@@ -94,7 +94,7 @@ export default function Login() {
                             Volunteer
                         </button>
                         <button
-                            class={
+                            className={
                                 userType === 'org'
                                     ? 'button yellow is-small'
                                     : 'button is-small'

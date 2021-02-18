@@ -1,0 +1,24 @@
+.update-form {
+    display: flex;
+    justify-content: space-around;
+
+    .checkboxes {
+        margin: 15px 0px;
+
+        .field {
+            margin-left: 15px;
+        }
+
+        .checkbox {
+            text-transform: capitalize;
+            color: $ants-gray-1 !important;
+            input {
+                margin-right: 3px;
+            }
+        }
+    }
+}
+
+.submit {
+    margin-top: 30px;
+}

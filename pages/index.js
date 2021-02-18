@@ -18,7 +18,7 @@ export default function Home() {
     const [posts, setPosts] = useState([])
     const [create, setCreate] = useState()
     const [events, setEvents] = useState([])
-
+    
     //get orgs
     useEffect(() => {
         if (userType && userType == 'user') {

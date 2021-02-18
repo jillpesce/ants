@@ -17,6 +17,15 @@
     margin: 15px 0px;
 }
 
+.success {
+    background-color: $ants-purple-3;
+    color: $ants-white;
+    border-radius: 4px;
+    padding: 3px 8px;
+    font-size: 14px;
+    margin: 15px 0px;
+}
+
 .button {
     &.dark {
         background-color: $ants-black !important;

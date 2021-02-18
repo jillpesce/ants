@@ -29,7 +29,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #777;
+        padding: 20px;
 
         .label {
             color: $ants-black !important;
@@ -44,6 +44,21 @@
             &:hover {
                 text-decoration: underline;
             }
+        }
+
+        .update-form {
+            margin: auto 20px;
+        }
+
+        .form-header {
+            color: $ants-black;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .form-subtitle {
+            color: $ants-gray-1;
+            font-size: 14px;
         }
     }
 
