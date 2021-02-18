@@ -111,6 +111,9 @@ export default function Profile() {
         <div>
             <Header />
             <h1>{user.username}'s Profile Page</h1>
+            <p>
+                <img src={user.image}></img>
+            </p>
             <p>Username: {user.username}</p>
             <p>
                 Location:{' '}

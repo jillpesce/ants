@@ -7,6 +7,7 @@ export default function Signup() {
     const [username, setUsername] = useState()
     const [password, setPassword] = useState()
     const [link, setLink] = useState()
+    const [image, setImage] = useState()
     const [name, setName] = useState()
     const [err, setErr] = useState()
 
@@ -49,6 +50,8 @@ export default function Signup() {
             setErr('Please enter a password')
         } else if (!link) {
             setErr('Please enter a website')
+        } else if (!image) {
+            setErr('Please enter an image')
         } else {
             const resp = await fetch(
                 'https://ants-senior-design.herokuapp.com/auth/signup',
@@ -62,7 +65,8 @@ export default function Signup() {
                         username,
                         password,
                         userType: 'org',
-                        link 
+                        image,
+                        link
                     }),
                 }
             )
@@ -122,6 +126,39 @@ export default function Signup() {
                 <input
                     type="text"
                     onChange={(e) => setLink(e.target.value)}
+                ></input>
+                <br></br>
+                <label>Image:</label>
+                <input
+                    type="file"
+                    accept=".jpeg, .png, .jpg"
+                    onChange={(e) => {
+                        var reader = new FileReader();
+                        reader.readAsBinaryString(e.target.files[0]);
+                    
+                        reader.onload = (f) => {
+                            console.log(btoa(reader.result));
+                            setImage(btoa(reader.result))
+                        };
+                        reader.onerror = (f) => {
+                            console.log('there are some problems');
+                        };
+                        // setImage(toBase64(e.target.value))
+                        // console.log("@@@" + toBase64(e.target.value))}
+                    }}
+                    // onChange={(e) => {
+                    //     let file = e.target.value
+                    //     if (file) {
+                    //         const reader = new FileReader(); 
+                    //         reader.onLoad = this._handleReaderLoaded.bind(this)
+                    //         reader.readAsBinaryString(file)
+                    //     }
+                    // }}
+                    // _handleReaderLoaded={(readerEvt) => {
+                    //     let binaryString = readerEvt.target.result
+                    //     this.setImage("data:image/png;base64, " + btoa(binaryString))
+                    //     console.log("@@@@@"+ btoa(binaryString))}
+                    // }
                 ></input>
                 <br></br>
                 <button onClick={(e) => signupOrg(e)}>Sign up</button>
