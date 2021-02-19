@@ -34,8 +34,7 @@ export default function UserProfile() {
         <div>
             <h1>Profile Page</h1>
             <p>
-                {' '}
-                Welcome {userType}, {user.username}{' '}
+                Welcome {userType}, {user.username}
             </p>
             <button onClick={logout}>Log out</button>
             <h2>User info:</h2>
@@ -44,8 +43,8 @@ export default function UserProfile() {
             <div>
                 <hr></hr>
                 <h2>Your Followed Orgs:</h2>
-                {orgs !== undefined ? (
-                    orgs.map((org) => {
+                {followedOrgs !== undefined ? (
+                    followedOrgs.map((org) => {
                         return <Org org={org} />
                     })
                 ) : (
