@@ -50,6 +50,38 @@
     margin: 15px 0px;
 }
 
+.tags-container {
+    display: flex;
+
+    .tag {
+        .tag-label {
+            font-size: 10px;
+            font-weight: 600;
+            margin: 0px;
+        }
+
+        text-transform: capitalize;
+        height: auto;
+        font-size: 13px;
+        font-weight: 400;
+        background-color: $ants-purple-3;
+        color: $ants-purple-1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1px 8px;
+        margin: 8px 12px 15px 0px;
+
+        .delete {
+            padding: 2px 5px;
+            margin-left: 2px;
+            transform: scale(0.75);
+            background-color: $ants-purple-1 !important;
+            opacity: 0.5;
+        }
+    }
+}
+
 .button {
     &.dark {
         background-color: $ants-black !important;
@@ -85,15 +117,6 @@
 
         &:hover {
             background-color: scale-color($ants-yellow, $lightness: -15%);
-        }
-
-        &.is-outlined {
-            background-color: transparent;
-            color: scale-color($ants-yellow, $lightness: 25%);
-            transform: scale(0.9);
-            border-width: 2px;
-            border: 2px solid scale-color($ants-yellow, $lightness: 18%);
-            font-weight: bold;
         }
     }
 }

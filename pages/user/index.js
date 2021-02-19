@@ -51,7 +51,6 @@ export default function Home() {
                 if (err) {
                     console.log('Error getting liked posts', err)
                 } else {
-                    console.log(posts)
                     setLikedPosts(posts, console.log(likedPosts))
                     const tempEvents = []
                     likedPosts.forEach(function (p) {

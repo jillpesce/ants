@@ -16,30 +16,6 @@
         }
     }
 
-    .card-tags {
-        display: flex;
-
-        .tag {
-            .tag-label {
-                font-size: 10px;
-                font-weight: 600;
-                margin: 0px;
-            }
-
-            text-transform: capitalize;
-            height: auto;
-            font-size: 13px;
-            font-weight: 400;
-            background-color: $ants-purple-3;
-            color: $ants-purple-1;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 1px 8px;
-            margin: 8px 12px 15px 0px;
-        }
-    }
-
     .label {
         font-size: 14px;
         color: $ants-black !important;

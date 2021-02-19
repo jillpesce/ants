@@ -70,15 +70,7 @@ export default function Profile() {
                 <div>
                     <h2>Organizations you follow:</h2>
                     {followedOrgs ? (
-                        followedOrgs.map((org) => (
-                            <Org
-                                name={org.name}
-                                description={org.description}
-                                interests={org.interests}
-                                id={org._id}
-                                user={user.username}
-                            />
-                        ))
+                        followedOrgs.map((org) => <Org org={org} />)
                     ) : (
                         <p>No followed orgs at this time</p>
                     )}

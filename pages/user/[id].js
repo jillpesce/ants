@@ -46,15 +46,7 @@ export default function UserProfile() {
                 <h2>Your Followed Orgs:</h2>
                 {orgs !== undefined ? (
                     orgs.map((org) => {
-                        return (
-                            <Org
-                                name={org.name}
-                                description={org.description}
-                                interests={org.interests}
-                                id={org._id}
-                                user={user.username}
-                            />
-                        )
+                        return <Org org={org} />
                     })
                 ) : (
                     <p>No recommended orgs at this time</p>

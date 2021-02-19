@@ -49,7 +49,6 @@ export default function CreatePost({ orgid, close }) {
                 .then((resp) => resp.json())
                 .then(({ err, post }) => {
                     if (err) {
-                        console.log(post)
                         console.log('Error creating post', err)
                     } else {
                         setErr('')

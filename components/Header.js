@@ -8,6 +8,7 @@ export default function Header(props) {
             <h1 className="ants">Ants</h1>
             <div className="headerRight">
                 <a href="/">Home</a>
+                {userType == 'user' && <a href="/search">Search</a>}
                 {userType == 'user' && <a href="/profile">Profile</a>}
                 <a href="/update">Update</a>
                 <a href="/resources">Resources</a>

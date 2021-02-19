@@ -77,7 +77,7 @@ const Post = ({
             <a className="card-title" href={`/post/${encodeURIComponent(_id)}`}>
                 {title}
             </a>
-            <div className="card-tags">
+            <div className="tags-container">
                 <span className="tag">
                     <p className="tag-label">Organization</p>
                     {org.name}
@@ -88,7 +88,9 @@ const Post = ({
                 </span>
                 <span className="tag">
                     <p className="tag-label">Location</p>
-                    {location.toLowerCase()}
+                    {location === 'DC' || location === 'NYC'
+                        ? location
+                        : location.toLowerCase()}
                 </span>
                 <span className="tag">
                     <p className="tag-label">Date</p>
@@ -96,7 +98,7 @@ const Post = ({
                 </span>
             </div>
             <div className="card-body">
-                <label className="label">Description</label>{' '}
+                <label className="label">Description</label>
                 <p className="card-text">{description}</p>
                 <div className="is-flex is-justify-content-space-between">
                     <b className="card-text">{numLikes} Likes</b>

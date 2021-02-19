@@ -1,0 +1,15 @@
+.search-bar {
+    display: flex;
+
+    .field {
+        margin-right: 50px;
+        max-width: 300px;
+        input {
+            width: 500px;
+        }
+
+        .dropdown-item {
+            text-transform: capitalize;
+        }
+    }
+}
