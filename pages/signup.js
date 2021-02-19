@@ -58,7 +58,7 @@ export default function Signup() {
                 login(userType, account._id, false)
                 router.push({
                     pathname: '/signup',
-                    query: { p: 2}
+                    query: { p: 2 },
                 })
             }
         }
@@ -176,22 +176,24 @@ export default function Signup() {
                             .
                         </p>
                         <UpdateForm
-                            onUpdate={() => userType === 'user' ?
-                                window.location.assign('/') :
-                                router.push({
-                                    pathname: '/signup',
-                                    query: { p: 3}
-                                })
+                            onUpdate={() =>
+                                userType === 'user'
+                                    ? window.location.assign('/')
+                                    : router.push({
+                                          pathname: '/signup',
+                                          query: { p: 3 },
+                                      })
                             }
                         />
                         <a
                             href="/"
-                            onClick={() => userType === 'user' ?
-                                window.location.assign('/') :
-                                router.push({
-                                    pathname: '/signup',
-                                    query: { p: 3}
-                                })
+                            onClick={() =>
+                                userType === 'user'
+                                    ? window.location.assign('/')
+                                    : router.push({
+                                          pathname: '/signup',
+                                          query: { p: 3 },
+                                      })
                             }
                         >
                             Skip this step
@@ -201,15 +203,13 @@ export default function Signup() {
                     <div>
                         <p className="form-header">Almost there...</p>
                         <p className="form-subtitle">
-                            Please provide some more information about your organization.
+                            Please provide some more information about your
+                            organization.
                         </p>
                         <OrgProfileForm
                             onSubmit={() => window.location.assign('/')}
                         />
-                        <a
-                            href="/"
-                            onClick={() => window.location.assign('/')}
-                        >
+                        <a href="/" onClick={() => window.location.assign('/')}>
                             Skip this step
                         </a>
                     </div>

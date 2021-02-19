@@ -12,10 +12,7 @@ function FileUpload(props) {
     }
 
     return (
-        <div
-            className="clickable"
-            onClick={handleClick}
-        >
+        <div className="clickable" onClick={handleClick}>
             <input
                 type="file"
                 accept="image/*"

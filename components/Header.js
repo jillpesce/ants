@@ -10,7 +10,6 @@ export default function Header(props) {
                 <a href="/">Home</a>
                 {userType == 'user' && <a href="/profile">Profile</a>}
                 <a href="/update">Update</a>
-                {userType == 'user' && <a href="/feed">Feed</a>}
                 <a href="/resources">Resources</a>
                 <a href="/about">About</a>
                 <button className="button yellow is-rounded" onClick={logout}>

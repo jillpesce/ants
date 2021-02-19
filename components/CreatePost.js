@@ -4,12 +4,9 @@ import typeList from '../constants/types'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
-export default function CreatePost(props) {
-    const { orgid, close, create } = props
+export default function CreatePost({ orgid, close }) {
     const [title, setTitle] = useState()
     const [description, setDescription] = useState()
-    const [err, setErr] = useState()
-    const [success, setSuccess] = useState()
     const [location, setLocation] = useState()
     const [type, setType] = useState()
     const [information, setInformation] = useState()
@@ -17,6 +14,8 @@ export default function CreatePost(props) {
     const [startDate, setStartDate] = useState()
     const [endDate, setEndDate] = useState()
     const [allDay, setAllDay] = useState()
+    const [err, setErr] = useState()
+    const [success, setSuccess] = useState()
 
     function post(e) {
         e.preventDefault()
@@ -62,124 +61,129 @@ export default function CreatePost(props) {
     }
 
     return (
-        <div>
-            {create ? (
-                <>
-                    <h2> Create a post </h2>
-                    <form>
-                        <label>Title:</label>
-                        <input
-                            type="text"
-                            onChange={(e) => setTitle(e.target.value)}
-                        ></input>
-                        <br />
-                        <br />
-
-                        <label>Type:</label>
+        <form className="create-post">
+            <div className="field">
+                <label className="label">Event Title</label>
+                <input
+                    className="input"
+                    type="text"
+                    onChange={(e) => setTitle(e.target.value)}
+                />
+            </div>
+            <div className="is-flex is-justify-content-space-between">
+                <div className="field">
+                    <label className="label">Category</label>
+                    <div className="control">
                         {typeList.map((t) => (
                             <div>
-                                <input
-                                    type="radio"
-                                    id={t}
-                                    name="type"
-                                    value={t}
-                                    onChange={() => setType(t)}
-                                />
-                                <label>{t}</label>
-                                <br />
+                                <label id={t} className="radio">
+                                    <input
+                                        type="radio"
+                                        name="type"
+                                        onChange={() => setType(t)}
+                                    />
+                                    {t.toLowerCase()}
+                                </label>
                             </div>
                         ))}
-
-                        <label>Location:</label>
-                        {locationsList.map((l) => (
-                            <div>
-                                <input
-                                    type="radio"
-                                    id={l}
-                                    name="location"
-                                    value={l}
-                                    onChange={() => setLocation(l)}
-                                />
-                                <label>{l}</label>
-                                <br />
-                            </div>
-                        ))}
+                    </div>
+                </div>
+                <div className="field">
+                    <label className="label">Location</label>
+                    {locationsList.map((l) => (
                         <div>
-                            <input
-                                type="radio"
-                                id="REMOTE"
-                                name="location"
-                                value="REMOTE"
-                                onChange={() => setLocation('REMOTE')}
-                            />
-                            <label>REMOTE</label>
-                            <br />
+                            <label id={l} className="radio">
+                                <input
+                                    type="radio"
+                                    name="type"
+                                    onChange={() => setType(l)}
+                                />
+                                {l === 'DC' || l === 'NYC'
+                                    ? l
+                                    : l.toLowerCase()}
+                            </label>
                         </div>
-
-                        <label>Start Date:</label>
-                        <DatePicker
-                            showTimeSelect
-                            selected={startDate}
-                            onChange={(date) => setStartDate(date)}
-                        />
-                        <br></br>
-                        <label>End Date:</label>
-                        <DatePicker
-                            showTimeSelect
-                            selected={endDate}
-                            onChange={(date) => setEndDate(date)}
-                        />
-                        <br></br>
-
-                        <label>All Day Event?</label>
+                    ))}
+                    <label className="radio">
                         <input
                             type="radio"
-                            name="type"
+                            name="location"
+                            onChange={() => setLocation('REMOTE')}
+                        />
+                        Remote
+                    </label>
+                </div>
+            </div>
+            <div className="is-flex is-justify-content-space-between">
+                <div className="field">
+                    <label className="label">Start Date</label>
+                    <DatePicker
+                        showTimeSelect
+                        selected={startDate}
+                        onChange={(date) => setStartDate(date)}
+                    />
+                </div>
+                <div className="field">
+                    <label className="label">End Date</label>
+                    <DatePicker
+                        showTimeSelect
+                        selected={endDate}
+                        onChange={(date) => setEndDate(date)}
+                    />
+                </div>
+                <div className="field">
+                    <label className="label">All Day Event?</label>
+                    <label className="radio">
+                        <input
+                            type="radio"
+                            name="location"
                             onChange={() => setAllDay(true)}
                         />
-                        <label>Yes</label>
+                        Yes
+                    </label>
+                    <label className="radio">
                         <input
                             type="radio"
-                            name="type"
-                            onChange={() => setAllDay(false)}
+                            name="location"
+                            onChange={() => setAllDay(true)}
                         />
-                        <label>No</label>
+                        No
+                    </label>
+                </div>
+            </div>
 
-                        <br></br>
-                        <label>Short description of your event:</label>
-                        <textarea
-                            onChange={(e) => setDescription(e.target.value)}
-                        ></textarea>
-                        <br />
-                        <label>More information for event page:</label>
-                        <textarea
-                            onChange={(e) => setInformation(e.target.value)}
-                        ></textarea>
-                        <br />
-                        <label>Add a link to more info:</label>
-                        <input
-                            type="text"
-                            onChange={(e) => setLink(e.target.value)}
-                        ></input>
-                        <br />
-                        {err && <p>{err}</p>}
-                        <button onClick={(e) => post(e)}>Post</button>
-                        <button
-                            onClick={(e) => {
-                                e.preventDefault()
-                                close()
-                            }}
-                        >
-                            Cancel
-                        </button>
-                    </form>
-                </>
-            ) : (
-                <>
-                    {err && <p>{err}</p>}
-                    {success && <p>{success}</p>}
-                </>
-            )}
-        </div>
+            <div className="field">
+                <label className="label">Event tagline</label>
+                <textarea
+                    className="textarea"
+                    onChange={(e) => setDescription(e.target.value)}
+                />
+            </div>
+            <div className="field">
+                <label className="label">Event description</label>
+                <textarea
+                    className="textarea"
+                    onChange={(e) => setInformation(e.target.value)}
+                />
+            </div>
+            <div className="field">
+                <label className="label">Link to more info</label>
+                <input
+                    className="input"
+                    type="text"
+                    onChange={(e) => setLink(e.target.value)}
+                />
+            </div>
+            {err && <p className="error">{err}</p>}
+            {success && <p className="success">{success}</p>}
+            <div className="is-flex is-justify-content-flex-end">
+                <button className="button" onClick={close}>
+                    Cancel
+                </button>
+                <button className="button purple" onClick={(e) => post(e)}>
+                    Post
+                </button>
+            </div>
+        </form>
     )
 }

@@ -1,0 +1,19 @@
+.create-post {
+    width: 50%;
+
+    .radio {
+        text-transform: capitalize;
+        color: $ants-gray-1 !important;
+        input {
+            margin-right: 3px;
+        }
+    }
+
+    .button {
+        margin: 10px;
+    }
+
+    .field {
+        margin: 12px 0;
+    }
+}

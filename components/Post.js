@@ -2,14 +2,19 @@ import { useState, useEffect, useContext } from 'react'
 import { UserContext } from '../contexts/user-context'
 import { isEmpty } from 'lodash'
 
-const Post = (props) => {
+const Post = ({
+    _id,
+    likes,
+    title,
+    description,
+    location,
+    type,
+    org,
+    userid,
+}) => {
     const [buttonText, setButtonText] = useState()
     const { user, userType, updateUser } = useContext(UserContext)
-    const [numLikes, setNumLikes] = useState(
-        (props.likes && props.likes.length) || 0
-    )
-
-    const { _id, title, description, location, type, org, userid } = props
+    const [numLikes, setNumLikes] = useState((likes && likes.length) || 0)
 
     useEffect(() => {
         if (isEmpty(user)) return
@@ -68,27 +73,44 @@ const Post = (props) => {
     }
 
     return (
-        <div className="card">
+        <div className="post card">
+            <a className="card-title" href={`/post/${encodeURIComponent(_id)}`}>
+                {title}
+            </a>
+            <div className="card-tags">
+                <span className="tag">
+                    <p className="tag-label">Organization</p>
+                    {org.name}
+                </span>
+                <span className="tag">
+                    <p className="tag-label">Event Type</p>
+                    {type.toLowerCase()}
+                </span>
+                <span className="tag">
+                    <p className="tag-label">Location</p>
+                    {location.toLowerCase()}
+                </span>
+                <span className="tag">
+                    <p className="tag-label">Date</p>
+                    date - date
+                </span>
+            </div>
             <div className="card-body">
-                <h5 className="card-title">
-                    <a href={`/post/${encodeURIComponent(_id)}`}>{title}</a>
-                </h5>
-                <h6 className="card-subtitle mb-2 text-muted">
-                    {type} by{' '}
-                    <a href={`/org/${encodeURIComponent(org._id)}`}>
-                        {org.name}
-                    </a>{' '}
-                    in {location}
-                </h6>
-                <p className="card-text">Description: {description}</p>
-                {userType == 'user' && (
-                    <button
-                        onClick={buttonText == 'Like' ? likePost : unlikePost}
-                    >
-                        {buttonText}
-                    </button>
-                )}
-                <p>{numLikes} Likes</p>
+                <label className="label">Description</label>{' '}
+                <p className="card-text">{description}</p>
+                <div className="is-flex is-justify-content-space-between">
+                    <b className="card-text">{numLikes} Likes</b>
+                    {userType == 'user' && (
+                        <button
+                            className="button yellow is-small is-rounded"
+                            onClick={
+                                buttonText == 'Like' ? likePost : unlikePost
+                            }
+                        >
+                            {buttonText}
+                        </button>
+                    )}
+                </div>
             </div>
         </div>
     )

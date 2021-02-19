@@ -21,23 +21,28 @@ export default function OrgProfileForm({ onSubmit }) {
     async function uploadFile() {
         const photoData = new FormData()
         photoData.append('image', image)
-        await fetch(`https://ants-senior-design.herokuapp.com/orgs/img/${user._id}`, {
-            method: 'POST',
-            body: photoData,
-            header: {
-                'content-type': 'multipart/form-data',
-            },
-        })
-        .then((resp) => resp.json())
-        .then(({ org, err }) => {
-            if (err) {
-                console.log('Error on image upload', err)
-                setErr('Sorry, an error occurred uploading image. Please try again.')
-                return
+        await fetch(
+            `https://ants-senior-design.herokuapp.com/orgs/img/${user._id}`,
+            {
+                method: 'POST',
+                body: photoData,
+                header: {
+                    'content-type': 'multipart/form-data',
+                },
             }
-            updateUser(org)
-        })
-   }
+        )
+            .then((resp) => resp.json())
+            .then(({ org, err }) => {
+                if (err) {
+                    console.log('Error on image upload', err)
+                    setErr(
+                        'Sorry, an error occurred uploading image. Please try again.'
+                    )
+                    return
+                }
+                updateUser(org)
+            })
+    }
 
     async function submit(e) {
         e.preventDefault()
@@ -51,21 +56,21 @@ export default function OrgProfileForm({ onSubmit }) {
                 },
                 body: JSON.stringify({
                     link,
-                    description
+                    description,
                 }),
             }
         )
-        .then((resp) => resp.json())
-        .then(({ org, err }) => {
-            if (err) {
-                setErr('Sorry, an error occurred. Please try again.')
-                console.log('Error updating profile', err)
-                return
-            }
-            updateUser(org)
-            setSuccess('Updated')
-            if (onSubmit) onSubmit()
-        })
+            .then((resp) => resp.json())
+            .then(({ org, err }) => {
+                if (err) {
+                    setErr('Sorry, an error occurred. Please try again.')
+                    console.log('Error updating profile', err)
+                    return
+                }
+                updateUser(org)
+                setSuccess('Updated')
+                if (onSubmit) onSubmit()
+            })
     }
 
     return (
@@ -95,10 +100,12 @@ export default function OrgProfileForm({ onSubmit }) {
                         }}
                     ></textarea>
                 </div>
-                {image ? <img src={URL.createObjectURL(image)} /> : <p className="error">No file uploaded</p>}
-                <FileUpload
-                    handleFile={setImage}
-                />
+                {image ? (
+                    <img src={URL.createObjectURL(image)} />
+                ) : (
+                    <p className="error">No file uploaded</p>
+                )}
+                <FileUpload handleFile={setImage} />
             </form>
             <div className="submit">
                 {err && <p className="error">{err}</p>}

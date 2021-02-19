@@ -10,7 +10,7 @@ export default function Login() {
     const [err, setErr] = useState()
 
     useEffect(() => {
-        if (!isEmpty(user)) window.location.assign('/')
+        if (user && !isEmpty(user)) window.location.assign('/')
     }, [user])
 
     async function submit(e) {
