@@ -143,22 +143,7 @@ export default function Signup() {
                         reader.onerror = (f) => {
                             console.log('there are some problems');
                         };
-                        // setImage(toBase64(e.target.value))
-                        // console.log("@@@" + toBase64(e.target.value))}
                     }}
-                    // onChange={(e) => {
-                    //     let file = e.target.value
-                    //     if (file) {
-                    //         const reader = new FileReader(); 
-                    //         reader.onLoad = this._handleReaderLoaded.bind(this)
-                    //         reader.readAsBinaryString(file)
-                    //     }
-                    // }}
-                    // _handleReaderLoaded={(readerEvt) => {
-                    //     let binaryString = readerEvt.target.result
-                    //     this.setImage("data:image/png;base64, " + btoa(binaryString))
-                    //     console.log("@@@@@"+ btoa(binaryString))}
-                    // }
                 ></input>
                 <br></br>
                 <button onClick={(e) => signupOrg(e)}>Sign up</button>
