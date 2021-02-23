@@ -1,6 +1,7 @@
 .update-form {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    min-width: 400px;
 
     .checkboxes {
         margin: 15px 0px;

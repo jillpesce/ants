@@ -63,7 +63,7 @@ export default function Search() {
             <Header />
             <div className="page-body">
                 <div className="section-header">
-                    <h1>Search</h1>
+                    <h1>Search Organizations</h1>
                     <h2>Discover new organizations</h2>
                 </div>
                 <div className="search-bar">

@@ -15,7 +15,6 @@ export default function OrgProfileForm({ onSubmit }) {
         if (!user) return
         setLink(user.link)
         setDescription(user.description)
-        setImage(user.image)
     }, [user])
 
     async function uploadFile() {
@@ -74,7 +73,7 @@ export default function OrgProfileForm({ onSubmit }) {
     }
 
     return (
-        <>
+        <div className="is-flex is-justify-content-space-between">
             <form className="profile-form">
                 <div className="field">
                     <label className="label">Link</label>
@@ -114,6 +113,6 @@ export default function OrgProfileForm({ onSubmit }) {
                     Done
                 </button>
             </div>
-        </>
+        </div>
     )
 }

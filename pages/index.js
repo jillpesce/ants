@@ -14,5 +14,9 @@ export default function Home() {
         if (!user) return window.location.assign('/login')
     }, [user])
 
-    return <div> loading ... </div>
+    return (
+        <div className="loading">
+            <p>LOADING...</p>
+        </div>
+    )
 }

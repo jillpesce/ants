@@ -24,6 +24,13 @@
         font-weight: 500;
     }
 
+    a {
+        @extend h2;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
     padding: 5px 0;
     margin: 15px 0;
     border-bottom: 2px solid $ants-purple-3;
@@ -126,11 +133,30 @@
     font-weight: 900;
     color: $ants-white;
     text-shadow: 3px 3px scale-color($ants-yellow, $lightness: -10%);
+
+    &:hover {
+        color: $ants-white;
+    }
 }
 
 .ants-yellow {
     @extend .ants;
     text-shadow: 3px 3px scale-color($ants-purple-1);
+}
+
+.loading {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $ants-yellow;
+
+    p {
+        color: $ants-white;
+        font-size: 30px;
+        font-weight: 600;
+    }
 }
 
 * {

@@ -17,23 +17,19 @@ export default function Update({ onUpdate }) {
         if (user.interests) setInterests(user.interests)
     }, [user])
 
-    function updateInterests(interest, checked) {
-        if (checked) {
-            interests.push(interest)
-            setInterests(interests)
+    function updateInterests(interest) {
+        if (!interests.includes(interest)) {
+            setInterests([...interests, interest])
         } else {
-            const newInterests = interests.filter((i) => i !== interest)
-            setInterests(newInterests)
+            setInterests(interests.filter((i) => i !== interest))
         }
     }
 
-    function updateLocations(location, checked) {
-        if (checked) {
-            locations.push(location)
-            setLocations(locations)
+    function updateLocations(location) {
+        if (!locations.includes(location)) {
+            setLocations([...locations, location])
         } else {
-            const newLocations = locations.filter((l) => l !== location)
-            setLocations(newLocations)
+            setLocations(locations.filter((l) => l !== location))
         }
     }
 
@@ -63,25 +59,24 @@ export default function Update({ onUpdate }) {
                     } else {
                         updateUser(user || org)
                         setSuccess('Updated')
-                        onUpdate()
+                        onUpdate && onUpdate()
                     }
                 })
         }
     }
 
     return (
-        <>
+        <div className="is-flex is-justify-content-space-between">
             <form className="update-form">
                 <div className="checkboxes">
-                    <label className="label"> Interests </label>
+                    <label className="label">Interests</label>
                     {interestsList.map((i) => (
                         <div className="field">
                             <label className="checkbox">
                                 <input
                                     type="checkbox"
-                                    onChange={(e) =>
-                                        updateInterests(i, e.target.checked)
-                                    }
+                                    onChange={(e) => updateInterests(i)}
+                                    checked={interests.includes(i)}
                                 />
                                 {i === 'LGBTQ' ? i : i.toLowerCase()}
                             </label>
@@ -89,15 +84,14 @@ export default function Update({ onUpdate }) {
                     ))}
                 </div>
                 <div className="checkboxes">
-                    <label className="label"> Locations </label>
+                    <label className="label">Locations</label>
                     {locationsList.map((i) => (
                         <div className="field">
                             <label className="checkbox">
                                 <input
                                     type="checkbox"
-                                    onChange={(e) =>
-                                        updateLocations(i, e.target.checked)
-                                    }
+                                    onChange={(e) => updateLocations(i)}
+                                    checked={locations.includes(i)}
                                 />
                                 {i === 'DC' || i === 'NYC'
                                     ? i
@@ -114,6 +108,6 @@ export default function Update({ onUpdate }) {
                     Done
                 </button>
             </div>
-        </>
+        </div>
     )
 }

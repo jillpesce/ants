@@ -1,0 +1,32 @@
+.profile-section {
+    margin: 0px 15px 30px 15px;
+
+    .profile-image {
+        max-height: 500px;
+        min-width: 30%;
+        width: 30%;
+        object-fit: contain;
+        overflow: hidden;
+        margin-right: 30px;
+    }
+
+    .form-container {
+        width: 100%;
+    }
+
+    .update-form,
+    .profile-form {
+        min-width: 50%;
+    }
+
+    .profile-subsection {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        margin-bottom: 40px;
+    }
+
+    button {
+        transform: scale(0.9);
+    }
+}

@@ -47,14 +47,19 @@ export default function Home() {
             })
     }
 
-    if (!user || userType !== 'org') return <div> loading ... </div>
+    if (!user || userType !== 'org')
+        return (
+            <div className="loading">
+                <p>LOADING...</p>
+            </div>
+        )
 
     return (
         <div>
             <Header />
             <div className="page-body">
                 <div className="section-header">
-                    <h1>Events</h1>
+                    <h1>Posts</h1>
                     <h2>See all your posts</h2>
                 </div>
                 {posts && posts.length ? (

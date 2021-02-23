@@ -80,7 +80,12 @@ export default function Home() {
         setEvents(tempEvents)
     }, [likedPosts])
 
-    if (!user || userType !== 'user') return <div> loading ... </div>
+    if (!user || userType !== 'user')
+        return (
+            <div className="loading">
+                <p>LOADING...</p>
+            </div>
+        )
 
     return (
         <div>

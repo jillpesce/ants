@@ -2,8 +2,7 @@
     margin: 20px;
     padding: 20px;
     border: 1px solid $ants-purple-3;
-    width: auto;
-    max-width: 500px;
+    width: 450px;
 
     .card-title {
         color: $ants-black !important;
@@ -14,6 +13,10 @@
         &:hover {
             text-decoration: underline;
         }
+    }
+
+    .tags-container {
+        overflow: scroll;
     }
 
     .label {

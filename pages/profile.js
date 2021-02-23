@@ -1,4 +1,6 @@
 import Header from '../components/Header'
+import UpdateForm from '../components/UpdateForm'
+import OrgProfileForm from '../components/OrgProfileForm'
 import { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../contexts/user-context'
 import { isEmpty } from 'lodash'
@@ -9,13 +11,14 @@ export default function Profile() {
     const { user, userType, logout } = useContext(UserContext)
     const [followedOrgs, setFollowedOrgsList] = useState([])
     const [likedPosts, setLikedPosts] = useState([])
+    const [update, setUpdate] = useState()
+    const [updateOrg, setUpdateOrg] = useState()
 
     //get list of orgs
     useEffect(() => {
-        if (isEmpty(user)) {
-            return
-        }
-
+        if (!user) window.location.assign('/login')
+        console.log(user, userType)
+        if (isEmpty(user) || userType === 'org') return
         fetch(
             `https://ants-senior-design.herokuapp.com/orgs/followed/${user.username}`
         )
@@ -47,46 +50,127 @@ export default function Profile() {
             })
     }, [user])
 
+    if (!user || isEmpty(user))
+        return (
+            <div className="loading">
+                <p>LOADING...</p>
+            </div>
+        )
+
     return (
         <div>
             <Header />
-            <h1>{user.username} Profile Page</h1>
-            <p>Username: {user.username}</p>
-            <p>
-                Location:{' '}
-                {user.locations &&
-                    user.locations.map((l) => {
-                        return <li>{l}</li>
-                    })}
-            </p>
-            <p>
-                Interests:{' '}
-                {user.interests &&
-                    user.interests.map((i) => {
-                        return <li>{i}</li>
-                    })}
-            </p>
-            {userType == 'user' && (
-                <div>
-                    <h2>Organizations you follow:</h2>
-                    {followedOrgs ? (
-                        followedOrgs.map((org) => <Org org={org} />)
-                    ) : (
-                        <p>No followed orgs at this time</p>
-                    )}
-                    <h2>Posts you like:</h2>
-                    {likedPosts ? (
-                        likedPosts.map((post) => (
-                            <Post {...post} org={user} userid={user._id} />
-                        ))
-                    ) : (
-                        <p>
-                            No posts yet! Go to the feed page to see posts from
-                            your orgs.
-                        </p>
-                    )}{' '}
+            <div className="page-body">
+                <div className="section-header">
+                    <h1>Hi, {user.username}.</h1>
+                    <h2>Thanks for marching with us</h2>
                 </div>
-            )}
+                <div className="profile-section">
+                    {update ? (
+                        <div className="form-container">
+                            <UpdateForm onUpdate={setUpdate} />
+                        </div>
+                    ) : (
+                        <div className="profile-subsection">
+                            <div>
+                                <label className="label">Location</label>
+                                <div className="tags-container">
+                                    {user.locations &&
+                                        user.locations.map((l) => (
+                                            <span className="tag">
+                                                {l === 'DC' || l === 'NYC'
+                                                    ? l
+                                                    : l.toLowerCase()}
+                                            </span>
+                                        ))}
+                                </div>
+                                <label className="label">Interests</label>
+                                <div className="tags-container">
+                                    {user.interests &&
+                                        user.interests.map((i) => (
+                                            <span className="tag">
+                                                {i === 'LGBTQ'
+                                                    ? i
+                                                    : i.toLowerCase()}
+                                            </span>
+                                        ))}
+                                </div>
+                            </div>
+                            <button
+                                className="button yellow"
+                                onClick={setUpdate}
+                            >
+                                Update Interets & Location
+                            </button>
+                        </div>
+                    )}
+                    {userType === 'org' && (
+                        <div>
+                            {updateOrg ? (
+                                <div className="form-container">
+                                    <OrgProfileForm onSubmit={setUpdateOrg} />
+                                </div>
+                            ) : (
+                                <div className="profile-subsection">
+                                    <div>
+                                        <label className="label">Image</label>
+                                        {user.image && (
+                                            <img
+                                                className="profile-image"
+                                                src={user.image}
+                                            />
+                                        )}
+                                        <label className="label">
+                                            Description
+                                        </label>
+                                        <div className="profile-text">
+                                            {user.description}
+                                        </div>
+                                        <label className="label">Link</label>
+                                        <div className="profile-text">
+                                            {user.link}
+                                        </div>
+                                    </div>
+                                    <button
+                                        className="button yellow"
+                                        onClick={setUpdateOrg}
+                                    >
+                                        Update Profile
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </div>
+                {userType == 'user' && (
+                    <>
+                        <div className="section-header">
+                            <h1>Organizations you follow</h1>
+                            <a href="/search">
+                                Find more orgs on the search page
+                            </a>
+                        </div>
+                        {followedOrgs ? (
+                            followedOrgs.map((org) => <Org org={org} />)
+                        ) : (
+                            <p className="error">No orgs yet!</p>
+                        )}
+                        <div className="section-header">
+                            <h1>Posts you like</h1>
+                            <a href="/home">
+                                Browse new posts on the home page
+                            </a>
+                        </div>
+                        {likedPosts && likedPosts.length ? (
+                            likedPosts.map((post) => (
+                                <Post {...post} org={user} userid={user._id} />
+                            ))
+                        ) : (
+                            <p className="error">No posts yet!</p>
+                        )}
+                    </>
+                )}
+            </div>
         </div>
     )
 }
