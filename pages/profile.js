@@ -3,21 +3,21 @@ import UpdateForm from '../components/UpdateForm'
 import OrgProfileForm from '../components/OrgProfileForm'
 import { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../contexts/user-context'
+import interestsList from '../constants/interests'
+import locationsList from '../constants/locations'
 import { isEmpty } from 'lodash'
 import Org from '../components/Org'
 import Post from '../components/Post'
 
 export default function Profile() {
-    const { user, userType, logout } = useContext(UserContext)
+    const { user, userType, logout, updateUser } = useContext(UserContext)
     const [followedOrgs, setFollowedOrgsList] = useState([])
     const [likedPosts, setLikedPosts] = useState([])
     const [update, setUpdate] = useState()
     const [updateOrg, setUpdateOrg] = useState()
 
-    //get list of orgs
     useEffect(() => {
         if (!user) window.location.assign('/login')
-        console.log(user, userType)
         if (isEmpty(user) || userType === 'org') return
         fetch(
             `https://ants-senior-design.herokuapp.com/orgs/followed/${user.username}`
