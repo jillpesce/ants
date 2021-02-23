@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import { UserContext } from '../contexts/user-context'
 import { isEmpty } from 'lodash'
+import moment from 'moment'
 
 const Post = ({
     _id,
@@ -10,21 +11,14 @@ const Post = ({
     location,
     type,
     org,
+    startDate,
+    endDate,
     userid,
 }) => {
-    const [buttonText, setButtonText] = useState()
     const { user, userType, updateUser } = useContext(UserContext)
-    const [numLikes, setNumLikes] = useState((likes && likes.length) || 0)
 
-    useEffect(() => {
-        if (isEmpty(user)) return
-        if (userType == 'user')
-            setButtonText(user.liked.includes(_id) ? 'Liked' : 'Like')
-    }, [user])
-
-    //follow org
     function likePost() {
-        if (!userid) {
+        if (!user) {
             setErr('Only users can like posts')
             return
         }
@@ -34,8 +28,8 @@ const Post = ({
                 'content-type': 'application/json',
             },
             body: JSON.stringify({
-                userid,
-                postid: _id,
+                userid: user._id,
+                postid: post._id,
             }),
         })
             .then((response) => response.json())
@@ -43,13 +37,11 @@ const Post = ({
                 if (err) console.log('Error liking post', err)
                 else {
                     updateUser(user)
-                    setNumLikes(post.likes.length)
-                    setButtonText('Liked')
+                    setPost(post)
                 }
             })
     }
 
-    //unfollow org
     function unlikePost() {
         fetch('https://ants-senior-design.herokuapp.com/posts/unlike', {
             method: 'POST',
@@ -57,8 +49,8 @@ const Post = ({
                 'content-type': 'application/json',
             },
             body: JSON.stringify({
-                userid,
-                postid: _id,
+                userid: user._id,
+                postid: post._id,
             }),
         })
             .then((response) => response.json())
@@ -66,8 +58,7 @@ const Post = ({
                 if (err) console.log('Error liking post', err)
                 else {
                     updateUser(user)
-                    setNumLikes(post.likes.length)
-                    setButtonText('Like')
+                    setPost(post)
                 }
             })
     }
@@ -94,23 +85,28 @@ const Post = ({
                 </span>
                 <span className="tag">
                     <p className="tag-label">Date</p>
-                    date - date
+                    {moment(startDate).format('MMM Do, YYYY')} -{' '}
+                    {moment(endDate).format('MMM Do, YYYY')}
                 </span>
             </div>
             <div className="card-body">
                 <label className="label">Description</label>
                 <p className="card-text">{description}</p>
                 <div className="is-flex is-justify-content-space-between">
-                    <b className="card-text">{numLikes} Likes</b>
-                    {userType == 'user' && (
-                        <button
-                            className="button yellow is-small is-rounded"
-                            onClick={
-                                buttonText == 'Like' ? likePost : unlikePost
-                            }
-                        >
-                            {buttonText}
-                        </button>
+                    <b className="card-text">{likes.length} Likes</b>
+                    {userType === 'user' && (
+                        <div className="is-flex justify-content-flex-end">
+                            <button
+                                className="button yellow"
+                                onClick={
+                                    likes.includes(user._id)
+                                        ? unlikePost
+                                        : likePost
+                                }
+                            >
+                                {likes.includes(user._id) ? 'Unlike' : 'Like'}
+                            </button>
+                        </div>
                     )}
                 </div>
             </div>
