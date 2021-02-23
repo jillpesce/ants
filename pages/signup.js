@@ -15,7 +15,6 @@ export default function Signup() {
     const [form, setForm] = useState()
     const [link, setLink] = useState()
     const [image, setImage] = useState()
-    const [name, setName] = useState()
     const [err, setErr] = useState()
     const router = useRouter()
 
@@ -31,10 +30,6 @@ export default function Signup() {
             setErr('Please enter a username')
         } else if (!password) {
             setErr('Please enter a password')
-        } else if (!link) {
-            setErr('Please enter a website')
-        } else if (!image) {
-            setErr('Please enter an image')
         } else {
             const resp = await fetch(
                 'https://ants-senior-design.herokuapp.com/auth/signup',
@@ -48,8 +43,6 @@ export default function Signup() {
                         username,
                         password,
                         userType: 'org',
-                        image,
-                        link,
                     }),
                 }
             )
@@ -156,54 +149,6 @@ export default function Signup() {
                         </div>
 
                         {err && <p className="error">{err}</p>}
-                        <h4>For orgs:</h4>
-                        <form>
-                            <label>Name:</label>
-                            <input
-                                type="text"
-                                onChange={(e) => setName(e.target.value)}
-                            ></input>
-                            <br></br>
-                            <label>Username:</label>
-                            <input
-                                type="text"
-                                onChange={(e) => setUsername(e.target.value)}
-                            ></input>
-                            <br></br>
-                            <label>Password:</label>
-                            <input
-                                type="password"
-                                onChange={(e) => setPassword(e.target.value)}
-                            ></input>
-                            <br></br>
-                            <label>Website:</label>
-                            <input
-                                type="text"
-                                onChange={(e) => setLink(e.target.value)}
-                            ></input>
-                            <br></br>
-                            <label>Image:</label>
-                            <input
-                                type="file"
-                                accept=".jpeg, .png, .jpg"
-                                onChange={(e) => {
-                                    var reader = new FileReader()
-                                    reader.readAsBinaryString(e.target.files[0])
-
-                                    reader.onload = (f) => {
-                                        console.log(btoa(reader.result))
-                                        setImage(btoa(reader.result))
-                                    }
-                                    reader.onerror = (f) => {
-                                        console.log('there are some problems')
-                                    }
-                                }}
-                            ></input>
-                            <br></br>
-                            <button onClick={(e) => signupOrg(e)}>
-                                Sign up
-                            </button>
-                        </form>
 
                         <button
                             className="button yellow is-rounded"

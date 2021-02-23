@@ -66,7 +66,7 @@ export default function Update({ onUpdate }) {
     }
 
     return (
-        <div className="is-flex is-justify-content-space-between">
+        <>
             <form className="update-form">
                 <div className="checkboxes">
                     <label className="label">Interests</label>
@@ -108,6 +108,6 @@ export default function Update({ onUpdate }) {
                     Done
                 </button>
             </div>
-        </div>
+        </>
     )
 }

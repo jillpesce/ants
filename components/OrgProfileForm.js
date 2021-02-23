@@ -13,6 +13,7 @@ export default function OrgProfileForm({ onSubmit }) {
 
     useEffect(() => {
         if (!user) return
+        console.log('here')
         setLink(user.link)
         setDescription(user.description)
     }, [user])
@@ -73,7 +74,7 @@ export default function OrgProfileForm({ onSubmit }) {
     }
 
     return (
-        <div className="is-flex is-justify-content-space-between">
+        <>
             <form className="profile-form">
                 <div className="field">
                     <label className="label">Link</label>
@@ -113,6 +114,6 @@ export default function OrgProfileForm({ onSubmit }) {
                     Done
                 </button>
             </div>
-        </div>
+        </>
     )
 }
