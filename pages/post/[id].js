@@ -91,7 +91,7 @@ export default function PostPage() {
                 <p>LOADING....</p>
             </div>
         )
-    console.log(post.likes.includes(user._id), post.likes, user._id)
+
     return (
         <div>
             <Header />

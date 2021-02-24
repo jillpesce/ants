@@ -13,9 +13,9 @@ const Post = ({
     org,
     startDate,
     endDate,
-    userid,
 }) => {
     const { user, userType, updateUser } = useContext(UserContext)
+    const [_likes, setLikes] = useState(likes)
 
     function likePost() {
         if (!user) {
@@ -29,7 +29,7 @@ const Post = ({
             },
             body: JSON.stringify({
                 userid: user._id,
-                postid: post._id,
+                postid: _id,
             }),
         })
             .then((response) => response.json())
@@ -37,7 +37,7 @@ const Post = ({
                 if (err) console.log('Error liking post', err)
                 else {
                     updateUser(user)
-                    setPost(post)
+                    setLikes(post.likes)
                 }
             })
     }
@@ -50,7 +50,7 @@ const Post = ({
             },
             body: JSON.stringify({
                 userid: user._id,
-                postid: post._id,
+                postid: _id,
             }),
         })
             .then((response) => response.json())
@@ -58,7 +58,7 @@ const Post = ({
                 if (err) console.log('Error liking post', err)
                 else {
                     updateUser(user)
-                    setPost(post)
+                    setLikes(post.likes)
                 }
             })
     }
@@ -69,7 +69,10 @@ const Post = ({
                 {title}
             </a>
             <div className="tags-container">
-                <span className="tag">
+                <span
+                    className="tag clickable"
+                    onClick={() => window.location.assign(`/org/${org._id}`)}
+                >
                     <p className="tag-label">Organization</p>
                     {org.name}
                 </span>
@@ -93,18 +96,18 @@ const Post = ({
                 <label className="label">Description</label>
                 <p className="card-text">{description}</p>
                 <div className="is-flex is-justify-content-space-between">
-                    <b className="card-text">{likes.length} Likes</b>
+                    <b className="card-text">{_likes.length} Likes</b>
                     {userType === 'user' && (
                         <div className="is-flex justify-content-flex-end">
                             <button
                                 className="button yellow"
                                 onClick={
-                                    likes.includes(user._id)
+                                    _likes.includes(user._id)
                                         ? unlikePost
                                         : likePost
                                 }
                             >
-                                {likes.includes(user._id) ? 'Unlike' : 'Like'}
+                                {_likes.includes(user._id) ? 'Unlike' : 'Like'}
                             </button>
                         </div>
                     )}

@@ -97,9 +97,7 @@ export default function Home() {
                 </div>
                 <div className="posts">
                     {posts && posts.length ? (
-                        posts.map((post) => (
-                            <Post {...post} userid={user._id} />
-                        ))
+                        posts.map((post) => <Post {...post} />)
                     ) : (
                         <p className="error">
                             {' '}
@@ -113,13 +111,18 @@ export default function Home() {
                     <h2>See all your events in one place</h2>
                 </div>
                 {events && (
-                    <Calendar
-                        localizer={localizer}
-                        events={events}
-                        startAccessor="start"
-                        endAccessor="end"
-                        style={{ height: 1000, margin: '40px 20px' }}
-                    />
+                    <div className="card calendar">
+                        <Calendar
+                            localizer={localizer}
+                            events={events}
+                            startAccessor="start"
+                            endAccessor="end"
+                            style={{
+                                height: 1000,
+                                margin: '40px 20px',
+                            }}
+                        />
+                    </div>
                 )}
             </div>
         </div>

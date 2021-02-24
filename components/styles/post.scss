@@ -1,8 +1,7 @@
 .post {
     margin: 20px;
     padding: 20px;
-    border: 1px solid $ants-purple-3;
-    width: 450px;
+    min-width: 520px;
 
     .card-title {
         color: $ants-black !important;

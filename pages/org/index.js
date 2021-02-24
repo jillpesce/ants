@@ -62,11 +62,6 @@ export default function Home() {
                     <h1>Posts</h1>
                     <h2>See all your posts</h2>
                 </div>
-                {posts && posts.length ? (
-                    posts.map((post) => <Post {...post} />)
-                ) : (
-                    <p className="error">Create a post to attract ants!</p>
-                )}
                 {create ? (
                     <CreatePost
                         orgid={user._id}
@@ -76,26 +71,38 @@ export default function Home() {
                         }}
                     />
                 ) : (
-                    <div className="is-flex is-justify-content-flex-end">
-                        <button
-                            className="button yellow"
-                            onClick={() => setCreate(true)}
-                        >
-                            Create a Post
-                        </button>
-                    </div>
+                    <>
+                        {posts && posts.length ? (
+                            posts.map((post) => <Post {...post} />)
+                        ) : (
+                            <p className="error">Create a post to attract ants!</p>
+                        )}
+                        <div className="is-flex is-justify-content-flex-end">
+                            <button
+                                className="button yellow"
+                                onClick={() => setCreate(true)}
+                            >
+                                Create a Post
+                            </button>
+                        </div>
+                    </>
                 )}
                 <div className="section-header">
                     <h1>Calendar</h1>
                     <h2>See what's coming up</h2>
                 </div>
-                <Calendar
-                    localizer={localizer}
-                    events={events}
-                    startAccessor="start"
-                    endAccessor="end"
-                    style={{ height: 800 }}
-                />
+                <div className="card calendar">
+                    <Calendar
+                        localizer={localizer}
+                        events={events}
+                        startAccessor="start"
+                        endAccessor="end"
+                        style={{
+                            height: 1000,
+                            margin: '40px 20px',
+                        }}
+                    />
+                </div>
             </div>
         </div>
     )

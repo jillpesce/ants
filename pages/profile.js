@@ -162,9 +162,7 @@ export default function Profile() {
                             </a>
                         </div>
                         {likedPosts && likedPosts.length ? (
-                            likedPosts.map((post) => (
-                                <Post {...post} org={user} userid={user._id} />
-                            ))
+                            likedPosts.map((post) => <Post {...post} />)
                         ) : (
                             <p className="error">No posts yet!</p>
                         )}

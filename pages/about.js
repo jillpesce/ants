@@ -12,9 +12,8 @@ export default function About() {
                     <h2></h2>
                 </div>
                 <p className="text">
-                    Ants is a social media platform for nonprofits and activist
-                    organizations to connect with community members and mobilize
-                    efforts.
+                    Ants is platform for nonprofits and activist organizations
+                    to connect with community members and mobilize efforts.
                 </p>
                 <div className="section-header">
                     <h1>Mission</h1>

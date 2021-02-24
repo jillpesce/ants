@@ -50,7 +50,7 @@ const Org = ({ org }) => {
             <div className="card-right">
                 <a
                     className="card-title"
-                    href={`/post/${encodeURIComponent(org._id)}`}
+                    href={`/org/${encodeURIComponent(org._id)}`}
                 >
                     {org.name}
                 </a>

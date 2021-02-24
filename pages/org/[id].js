@@ -5,13 +5,8 @@ import isEmpty from 'lodash/isEmpty'
 import Post from '../../components/Post'
 import Header from '../../components/Header'
 import { useRouter } from 'next/router'
-import { Calendar, momentLocalizer } from 'react-big-calendar'
-import 'react-big-calendar/lib/css/react-big-calendar.css'
-import moment from 'moment'
 
-const localizer = momentLocalizer(moment)
-
-export default function Profile() {
+export default function Org() {
     const { user, userType, logout } = useContext(UserContext)
     const [org, setOrg] = useState([])
     const [posts, setPosts] = useState([])
@@ -130,54 +125,54 @@ export default function Profile() {
     return (
         <div>
             <Header />
-            {org && (
-                <div>
-                    <h2>{org.name}'s page</h2>
+            <div className="page-body org-page">
+                <div className="section-header">
+                    <h1>{org.name}</h1>
+                </div>
+                <div className="profile-section is-flex is-justify-content-space-between">
+                    <div>
+                        <label className="label">Location</label>
+                        <div className="tags-container">
+                            {user.locations &&
+                                user.locations.map((l) => (
+                                    <span className="tag">
+                                        {l === 'DC' || l === 'NYC'
+                                            ? l
+                                            : l.toLowerCase()}
+                                    </span>
+                                ))}
+                        </div>
+                        <label className="label">Interests</label>
+                        <div className="tags-container">
+                            {user.interests &&
+                                user.interests.map((i) => (
+                                    <span className="tag">
+                                        {i === 'LGBTQ' ? i : i.toLowerCase()}
+                                    </span>
+                                ))}
+                        </div>
+                    </div>
                     {userType == 'user' && (
                         <button
                             onClick={
                                 buttonText == 'Follow' ? followOrg : unfollowOrg
                             }
+                            className="button purple"
                         >
                             {buttonText}
                         </button>
                     )}
-                    <br></br>
-                    <br></br>
-                    <p>
-                        Location:{' '}
-                        {org.locations &&
-                            org.locations.map((l) => {
-                                return <li>{l}</li>
-                            })}
-                    </p>
-                    <p>
-                        Interests:{' '}
-                        {org.interests &&
-                            org.interests.map((i) => {
-                                return <li>{i}</li>
-                            })}
-                    </p>
-                    <h2> Posts </h2>
-                    {!posts.length && <p>No posts yet</p>}
-
-                    {posts &&
-                        posts.map((post) => (
-                            <Post {...post} org={org} userid={user._id} />
-                        ))}
-
-                    <div>
-                        <h2>Upcoming Events:</h2>
-                        <Calendar
-                            localizer={localizer}
-                            events={events}
-                            startAccessor="start"
-                            endAccessor="end"
-                            style={{ height: 1000 }}
-                        />
-                    </div>
                 </div>
-            )}
+                <div className="section-header">
+                    <h1>Posts</h1>
+                    <h2>Find your next mission</h2>
+                </div>
+                {posts && posts.length ? (
+                    posts.map((post) => <Post {...post} />)
+                ) : (
+                    <p className="error">No posts yet</p>
+                )}
+            </div>
         </div>
     )
 }

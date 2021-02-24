@@ -1,6 +1,7 @@
 .page-body {
-    padding: 0 4%;
-    margin-bottom: 60px;
+    padding: 0 4% 60px 4%;
+    background-color: $ants-white;
+    min-height: calc(100vh - 85px);
 }
 
 .page-header {
@@ -31,8 +32,8 @@
         }
     }
 
-    padding: 5px 0;
-    margin: 15px 0;
+    padding: 20px 20px 0 20px;
+    margin-bottom: 15px;
     border-bottom: 2px solid $ants-purple-3;
     display: flex;
     align-items: baseline;
@@ -85,6 +86,11 @@
             transform: scale(0.75);
             background-color: $ants-purple-1 !important;
             opacity: 0.5;
+        }
+
+        &.clickable:hover {
+            background-color: scale-color($ants-purple-3, $lightness: -10%);
+            cursor: pointer;
         }
     }
 }
@@ -147,7 +153,11 @@
 
 .ants-yellow {
     @extend .ants;
-    text-shadow: 3px 3px scale-color($ants-purple-1);
+    text-shadow: 3px 3px $ants-purple-1;
+}
+
+.card {
+    border: 1px solid $ants-purple-3;
 }
 
 .loading {
