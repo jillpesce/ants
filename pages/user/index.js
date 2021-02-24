@@ -100,9 +100,8 @@ export default function Home() {
                         posts.map((post) => <Post {...post} />)
                     ) : (
                         <p className="error">
-                            {' '}
-                            No posts yet! Go to the home page to follow more
-                            orgs.{' '}
+                            No posts yet! Go to the search page to discover
+                            organizations.
                         </p>
                     )}
                 </div>

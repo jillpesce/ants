@@ -128,30 +128,48 @@ export default function Org() {
             <div className="page-body org-page">
                 <div className="section-header">
                     <h1>{org.name}</h1>
+                    <h2>Discover more about this organization</h2>
                 </div>
                 <div className="profile-section is-flex is-justify-content-space-between">
-                    <div>
-                        <label className="label">Location</label>
-                        <div className="tags-container">
-                            {user.locations &&
-                                user.locations.map((l) => (
-                                    <span className="tag">
-                                        {l === 'DC' || l === 'NYC'
-                                            ? l
-                                            : l.toLowerCase()}
-                                    </span>
-                                ))}
-                        </div>
-                        <label className="label">Interests</label>
-                        <div className="tags-container">
-                            {user.interests &&
-                                user.interests.map((i) => (
-                                    <span className="tag">
-                                        {i === 'LGBTQ' ? i : i.toLowerCase()}
-                                    </span>
-                                ))}
+                    <div className="is-flex">
+                        {org.image && (
+                            <img className="profile-image" src={org.image} />
+                        )}
+                        <div>
+                            <label className="label">Location</label>
+                            <div className="tags-container">
+                                {user.locations &&
+                                    user.locations.map((l) => (
+                                        <span className="tag">
+                                            {l === 'DC' || l === 'NYC'
+                                                ? l
+                                                : l.toLowerCase()}
+                                        </span>
+                                    ))}
+                            </div>
+                            <label className="label">Interests</label>
+                            <div className="tags-container">
+                                {user.interests &&
+                                    user.interests.map((i) => (
+                                        <span className="tag">
+                                            {i === 'LGBTQ'
+                                                ? i
+                                                : i.toLowerCase()}
+                                        </span>
+                                    ))}
+                            </div>
+                            <label className="label">Description</label>
+                            <div className="profile-text">
+                                {org.description}
+                            </div>
+                            <div className="profile-text">
+                                {org.information}
+                            </div>
+                            <label className="label">Link</label>
+                            <div className="profile-text">{org.link}</div>
                         </div>
                     </div>
+
                     {userType == 'user' && (
                         <button
                             onClick={

@@ -42,7 +42,7 @@ export default function Signup() {
                         name,
                         username,
                         password,
-                        userType: 'org',
+                        userType,
                     }),
                 }
             )

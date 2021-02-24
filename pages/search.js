@@ -10,7 +10,7 @@ export default function Search() {
     const { user, userType } = useContext(UserContext)
     const [allOrgs, setAllOrgs] = useState([])
     const [displayOrgs, setDisplayOrgs] = useState([])
-    const [query, setQuery] = useState()
+    const [query, setQuery] = useState('')
     const [locations, setLocations] = useState([])
     const [interests, setInterests] = useState([])
     const [dropdown, setDropdown] = useState()
