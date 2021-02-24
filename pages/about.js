@@ -9,7 +9,6 @@ export default function About() {
             <div className="page-body">
                 <div className="section-header">
                     <h1>About Ants</h1>
-                    <h2></h2>
                 </div>
                 <p className="text">
                     Ants is platform for nonprofits and activist organizations
@@ -17,7 +16,6 @@ export default function About() {
                 </p>
                 <div className="section-header">
                     <h1>Mission</h1>
-                    <h2></h2>
                 </div>
                 <p className="text">
                     Our ultimate goal is to provide one platform to create a
@@ -29,7 +27,6 @@ export default function About() {
                 </p>
                 <div className="section-header">
                     <h1>Who we are</h1>
-                    <h2></h2>
                 </div>
                 <div className="cards">
                     <div className="is-flex">

@@ -75,7 +75,9 @@ export default function Home() {
                         {posts && posts.length ? (
                             posts.map((post) => <Post {...post} />)
                         ) : (
-                            <p className="error">Create a post to attract ants!</p>
+                            <p className="error">
+                                Create a post to attract ants!
+                            </p>
                         )}
                         <div className="is-flex is-justify-content-flex-end">
                             <button
