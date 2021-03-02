@@ -100,7 +100,7 @@ export default function Profile() {
                                 className="button yellow"
                                 onClick={setUpdate}
                             >
-                                Update Interets & Location
+                                Update Interests & Location
                             </button>
                         </div>
                     )}
