@@ -105,11 +105,11 @@ const Post = ({
                         <div className="is-flex justify-content-flex-end">
                             <button
                                 className="button yellow"
-                                onClick={
-                                    _likes.includes(user._id)
-                                        ? unlikePost
-                                        : likePost
-                                }
+                                onClick={(e) => {
+                                    e.stopPropagation()
+                                    if (_likes.includes(user._id)) unlikePost()
+                                    else likePost()
+                                }}
                             >
                                 {_likes.includes(user._id) ? 'Unlike' : 'Like'}
                             </button>
