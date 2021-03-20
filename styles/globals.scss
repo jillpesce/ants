@@ -172,6 +172,10 @@
     align-items: center;
     background-color: $ants-yellow;
 
+    & .section {
+        height: 200px;
+    }
+
     p {
         color: $ants-white;
         font-size: 30px;
