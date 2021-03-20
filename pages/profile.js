@@ -127,9 +127,12 @@ export default function Profile() {
                                             {user.description}
                                         </div>
                                         <label className="label">Link</label>
-                                        <div className="profile-text">
+                                        <a
+                                            href={user.link}
+                                            className="profile-text"
+                                        >
                                             {user.link}
-                                        </div>
+                                        </a>
                                     </div>
                                     <button
                                         className="button yellow"
