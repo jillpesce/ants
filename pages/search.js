@@ -39,7 +39,7 @@ export default function Search() {
 
     // filter orgs
     useEffect(() => {
-        if (!query && !interests.length && !location.length)
+        if (!query && !interests.length && !locations.length)
             setDisplayOrgs(allOrgs)
         else
             setDisplayOrgs(
