@@ -164,6 +164,11 @@
     border: 1px solid $ants-purple-3;
 }
 
+.card-scroll-container {
+    display: flex;
+    overflow: scroll;
+}
+
 .loading {
     width: 100vw;
     height: 100vh;

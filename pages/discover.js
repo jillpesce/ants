@@ -60,11 +60,11 @@ export default function Discover() {
                 </div>
                 <div className="section-body">
                     {trending ? (
-                        trending.map((r) => <Org org={r} />)
-                    ) : (
-                        <div className="loading section">
-                            <p>LOADING...</p>
+                        <div className="card-scroll-container">
+                            {trending.map((o) => <Org org={o} />)}
                         </div>
+                    ) : (
+                        <p>LOADING...</p>
                     )}
                 </div>
                 <div className="section-header">
@@ -73,11 +73,11 @@ export default function Discover() {
                 </div>
                 <div className="section-body">
                     {recent ? (
-                        recent.map((r) => <Org org={r} />)
-                    ) : (
-                        <div className="loading section">
-                            <p>LOADING...</p>
+                        <div className="card-scroll-container">
+                            {recent.map((o) => <Org org={o} />)}
                         </div>
+                    ) : (
+                        <p>LOADING...</p>
                     )}
                 </div>
             </div>
