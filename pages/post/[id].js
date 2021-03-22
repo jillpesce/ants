@@ -100,63 +100,76 @@ export default function PostPage() {
                     <h1>{post.title}</h1>
                     <a href={`/org/${post.org._id}`}>Post by {post.org.name}</a>
                 </div>
-                <div className="tags-container">
-                    <span className="tag">
-                        <p className="tag-label">Organization</p>
-                        {post.org.name}
-                    </span>
-                    <span className="tag">
-                        <p className="tag-label">Event Type</p>
-                        {post.type.toLowerCase()}
-                    </span>
-                    <span className="tag">
-                        <p className="tag-label">Location</p>
-                        {post.location === 'DC' || post.location === 'NYC'
-                            ? post.location
-                            : post.location.toLowerCase()}
-                    </span>
-                    {post.startDate && post.endDate && (
+                <div className="section-body">
+                    <div className="tags-container">
                         <span className="tag">
-                            <p className="tag-label">Date</p>
-                            {moment(post.startDate).format(
-                                'MMM Do, YYYY'
-                            )} - {moment(post.endDate).format('MMM Do, YYYY')}
+                            <p className="tag-label">Organization</p>
+                            {post.org.name}
                         </span>
+                        <span className="tag">
+                            <p className="tag-label">Event Type</p>
+                            {post.type.toLowerCase()}
+                        </span>
+                        <span className="tag">
+                            <p className="tag-label">Location</p>
+                            {post.location === 'DC' || post.location === 'NYC'
+                                ? post.location
+                                : post.location.toLowerCase()}
+                        </span>
+                        {post.startDate && post.endDate && (
+                            <span className="tag">
+                                <p className="tag-label">Date</p>
+                                {moment(post.startDate).format(
+                                    'MMM Do, YYYY'
+                                )}{' '}
+                                - {moment(post.endDate).format('MMM Do, YYYY')}
+                            </span>
+                        )}
+                    </div>
+
+                    <label className="label">Description</label>
+                    <p className="text">{post.description}</p>
+                    {post.information && (
+                        <>
+                            <label className="label">Information</label>
+                            <p className="text">{post.information}</p>
+                        </>
                     )}
+                    {post.volunteerInformation && (
+                        <>
+                            <label className="label">
+                                Volunteer Information
+                            </label>
+                            <p className="text">{post.volunteerInformation}</p>
+                        </>
+                    )}
+                    {post.link && (
+                        <div>
+                            <label className="label">Link</label>
+                            <a href={post.link}>Find out more</a>
+                        </div>
+                    )}
+
+                    {err && <p className="error">{err}</p>}
+                    <br />
+                    {userType === 'user' && (
+                        <div className="is-flex justify-content-flex-end">
+                            <button
+                                className="button yellow"
+                                onClick={
+                                    post.likes.includes(user._id)
+                                        ? unlikePost
+                                        : likePost
+                                }
+                            >
+                                {post.likes.includes(user._id)
+                                    ? 'Unlike'
+                                    : 'Like'}
+                            </button>
+                        </div>
+                    )}
+                    <b>{post.likes.length || 0} Likes</b>
                 </div>
-
-                <label className="label">Description</label>
-                <p className="text">{post.description}</p>
-                {post.information && (
-                    <>
-                        <label className="label">Information</label>
-                        <p className="text">{post.information}</p>
-                    </>
-                )}
-                {post.link && (
-                    <div>
-                        <label className="label">Link</label>
-                        <a href={post.link}>Find out more</a>
-                    </div>
-                )}
-
-                {err && <p className="error">{err}</p>}
-                <br />
-                {userType === 'user' && (
-                    <div className="is-flex justify-content-flex-end">
-                        <button
-                            className="button yellow"
-                            onClick={
-                                post.likes.includes(user._id)
-                                    ? unlikePost
-                                    : likePost
-                            }
-                        >
-                            {post.likes.includes(user._id) ? 'Unlike' : 'Like'}
-                        </button>
-                    </div>
-                )}
-                <b>{post.likes.length || 0} Likes</b>
             </div>
         </div>
     )

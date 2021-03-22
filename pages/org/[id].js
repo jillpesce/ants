@@ -166,7 +166,9 @@ export default function Org() {
                                 {org.information}
                             </div>
                             <label className="label">Link</label>
-                            <div className="profile-text">{org.link}</div>
+                            <a href={org.link} className="profile-text">
+                                {org.link}
+                            </a>
                         </div>
                     </div>
 

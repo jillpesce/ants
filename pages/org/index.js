@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../../contexts/user-context'
 import isEmpty from 'lodash/isEmpty'
-import Org from '../../components/Org'
 import Header from '../../components/Header'
 import Post from '../../components/Post'
 import CreatePost from '../../components/CreatePost'

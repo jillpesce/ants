@@ -95,7 +95,7 @@ export default function Home() {
                     <h1>Feed</h1>
                     <h2>New posts from organizations you follow</h2>
                 </div>
-                <div className="posts">
+                <>
                     {posts && posts.length ? (
                         posts.map((post) => <Post {...post} />)
                     ) : (
@@ -104,7 +104,7 @@ export default function Home() {
                             organizations.
                         </p>
                     )}
-                </div>
+                </>
                 <div className="section-header">
                     <h1>Calendar</h1>
                     <h2>See all your events in one place</h2>
