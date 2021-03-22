@@ -174,7 +174,7 @@ export default function Signup() {
                         <UpdateForm
                             onUpdate={() =>
                                 userType === 'user'
-                                    ? window.location.assign('/')
+                                    ? window.location.assign('/search')
                                     : router.push({
                                           pathname: '/signup',
                                           query: { p: 3 },
@@ -182,10 +182,9 @@ export default function Signup() {
                             }
                         />
                         <a
-                            href="/"
                             onClick={() =>
                                 userType === 'user'
-                                    ? window.location.assign('/')
+                                    ? window.location.assign('/search')
                                     : router.push({
                                           pathname: '/signup',
                                           query: { p: 3 },
