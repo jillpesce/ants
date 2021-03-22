@@ -4,11 +4,11 @@ import { isEmpty } from 'lodash'
 
 const Org = ({ org }) => {
     const [buttonText, setButtonText] = useState()
-    const { user, updateUser } = useContext(UserContext)
+    const { user, userType, updateUser } = useContext(UserContext)
 
     useEffect(() => {
         if (isEmpty(user)) return
-        setButtonText(user.following.includes(org._id) ? 'Following' : 'Follow')
+        else setButtonText(user.following.includes(org._id) ? 'Following' : 'Follow')
     }, [user])
 
     //follow org
