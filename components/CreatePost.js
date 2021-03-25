@@ -94,8 +94,8 @@ export default function CreatePost({ orgid, close }) {
                             <label id={l} className="radio">
                                 <input
                                     type="radio"
-                                    name="type"
-                                    onChange={() => setType(l)}
+                                    name="location"
+                                    onChange={() => setLocation(l)}
                                 />
                                 {l === 'DC' || l === 'NYC'
                                     ? l
@@ -135,7 +135,7 @@ export default function CreatePost({ orgid, close }) {
                     <label className="radio">
                         <input
                             type="radio"
-                            name="location"
+                            name="allday"
                             onChange={() => setAllDay(true)}
                         />
                         Yes
@@ -143,7 +143,7 @@ export default function CreatePost({ orgid, close }) {
                     <label className="radio">
                         <input
                             type="radio"
-                            name="location"
+                            name="allday"
                             onChange={() => setAllDay(true)}
                         />
                         No
