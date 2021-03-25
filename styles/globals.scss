@@ -40,6 +40,10 @@
     justify-content: space-between;
 }
 
+.section-body {
+    padding: 0 20px;
+}
+
 .error {
     color: $ants-gray-2;
     background-color: $ants-gray-3;
@@ -160,6 +164,11 @@
     border: 1px solid $ants-purple-3;
 }
 
+.card-scroll-container {
+    display: flex;
+    overflow: scroll;
+}
+
 .loading {
     width: 100vw;
     height: 100vh;
@@ -167,6 +176,10 @@
     justify-content: center;
     align-items: center;
     background-color: $ants-yellow;
+
+    & .section {
+        height: 200px;
+    }
 
     p {
         color: $ants-white;

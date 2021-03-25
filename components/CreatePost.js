@@ -10,6 +10,7 @@ export default function CreatePost({ orgid, close }) {
     const [location, setLocation] = useState()
     const [type, setType] = useState()
     const [information, setInformation] = useState()
+    const [volunteerInformation, setVolunteerInformation] = useState()
     const [link, setLink] = useState()
     const [startDate, setStartDate] = useState()
     const [endDate, setEndDate] = useState()
@@ -28,7 +29,7 @@ export default function CreatePost({ orgid, close }) {
         } else if (!type) {
             setErr('Please select an event type')
         } else {
-            fetch('https://ants-senior-design.herokuapp.com/orgs/post', {
+            fetch('http://localhost:5000/orgs/post', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
@@ -40,6 +41,7 @@ export default function CreatePost({ orgid, close }) {
                     type,
                     orgid,
                     information,
+                    volunteerInformation,
                     link,
                     startDate,
                     endDate,
@@ -156,6 +158,7 @@ export default function CreatePost({ orgid, close }) {
                 <textarea
                     className="textarea"
                     onChange={(e) => setDescription(e.target.value)}
+                    placeholder="A short sentence about the event&#8212;this will be visible when volunteers are browsing through events."
                 />
             </div>
             <div className="field">
@@ -163,6 +166,15 @@ export default function CreatePost({ orgid, close }) {
                 <textarea
                     className="textarea"
                     onChange={(e) => setInformation(e.target.value)}
+                    placeholder="All the information volunteers need to know about the event: its goal, how to participate, how their contribution will make a difference, etc! This will be visible on the event page."
+                />
+            </div>
+            <div className="field">
+                <label className="label">Volunteer Information</label>
+                <textarea
+                    className="textarea"
+                    onChange={(e) => setVolunteerInformation(e.target.value)}
+                    placeholder="Use this section to specify the number of volunteers you need or any special skills needed for the event. This will be visible on the event page."
                 />
             </div>
             <div className="field">

@@ -64,14 +64,18 @@ const Post = ({
     }
 
     return (
-        <div className="post card">
-            <a className="card-title" href={`/post/${encodeURIComponent(_id)}`}>
-                {title}
-            </a>
+        <div
+            className="post card"
+            onClick={() => window.location.assign(`/post/${_id}`)}
+        >
+            <p className="card-title">{title}</p>
             <div className="tags-container">
                 <span
                     className="tag clickable"
-                    onClick={() => window.location.assign(`/org/${org._id}`)}
+                    onClick={(e) => {
+                        e.stopPropagation()
+                        window.location.assign(`/org/${org._id}`)
+                    }}
                 >
                     <p className="tag-label">Organization</p>
                     {org.name}
@@ -101,11 +105,11 @@ const Post = ({
                         <div className="is-flex justify-content-flex-end">
                             <button
                                 className="button yellow"
-                                onClick={
-                                    _likes.includes(user._id)
-                                        ? unlikePost
-                                        : likePost
-                                }
+                                onClick={(e) => {
+                                    e.stopPropagation()
+                                    if (_likes.includes(user._id)) unlikePost()
+                                    else likePost()
+                                }}
                             >
                                 {_likes.includes(user._id) ? 'Unlike' : 'Like'}
                             </button>

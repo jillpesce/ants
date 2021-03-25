@@ -3,7 +3,7 @@
 .org {
     @extend .post;
     display: flex;
-    width: 100%;
+    min-width: 700px;
     max-width: 100%;
 
     .card-left {

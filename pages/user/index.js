@@ -95,7 +95,7 @@ export default function Home() {
                     <h1>Feed</h1>
                     <h2>New posts from organizations you follow</h2>
                 </div>
-                <div className="posts">
+                <div className="card-scroll-container">
                     {posts && posts.length ? (
                         posts.map((post) => <Post {...post} />)
                     ) : (
