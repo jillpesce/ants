@@ -37,7 +37,7 @@ const Org = ({ org }) => {
                 'content-type': 'application/json',
             },
             body: JSON.stringify({
-                username: user.name,
+                username: user.username,
                 orgID: org._id,
             }),
         }).catch((err) => console.log('error unfollowing org', err))
