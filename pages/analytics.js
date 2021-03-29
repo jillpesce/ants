@@ -24,7 +24,6 @@ export default function Analytics() {
         fetch('https://ants-senior-design.herokuapp.com/analytics')
             .then((resp) => resp.json())
             .then((analytics) => {
-                console.log(analytics)
                 setTypes(groupBy(analytics, 'action'))
             })
     }, [auth])

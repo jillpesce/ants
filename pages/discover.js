@@ -28,12 +28,22 @@ export default function Discover() {
                     setRecent(orgs)
                 }
             })
+
         fetch('https://ants-senior-design.herokuapp.com/orgs/trending')
             .then((resp) => resp.json())
             .then(({ err, orgs }) => {
                 if (err) console.log('Error getting recent orgs', err)
                 else {
                     setTrending(orgs)
+                }
+            })
+
+        fetch('https://ants-senior-design.herokuapp.com/orgs/recommended/' + user._id)
+            .then((resp) => resp.json())
+            .then(({ err, orgs }) => {
+                if (err) console.log('Error getting recent orgs', err)
+                else {
+                    setRecommended(orgs)
                 }
             })
     }, [user])
@@ -53,7 +63,23 @@ export default function Discover() {
                     <h1>Recommended Orgs</h1>
                     <h2>We think you might like these orgs</h2>
                 </div>
-                <div className="section-body"></div>
+                <div className="section-body">
+                    {recommended ? (
+                        recommended.length ? (
+                            <div className="card-scroll-container">
+                                {recommended.map((o) => (
+                                    <Org org={o} />
+                                ))}
+                            </div>
+                        ) : (
+                            <p className="error">
+                                Follow orgs to get recommendations!
+                            </p>
+                        )
+                    ) : (
+                        <p className="loading-text">LOADING...</p>
+                    )}
+                </div>
                 <div className="section-header">
                     <h1>Trending Orgs</h1>
                     <h2>These orgs have had a lot of activity this week</h2>
@@ -61,10 +87,12 @@ export default function Discover() {
                 <div className="section-body">
                     {trending ? (
                         <div className="card-scroll-container">
-                            {trending.map((o) => <Org org={o} />)}
+                            {trending.map((o) => (
+                                <Org org={o} />
+                            ))}
                         </div>
                     ) : (
-                        <p>LOADING...</p>
+                        <p className="loading-text">LOADING...</p>
                     )}
                 </div>
                 <div className="section-header">
@@ -74,10 +102,12 @@ export default function Discover() {
                 <div className="section-body">
                     {recent ? (
                         <div className="card-scroll-container">
-                            {recent.map((o) => <Org org={o} />)}
+                            {recent.map((o) => (
+                                <Org org={o} />
+                            ))}
                         </div>
                     ) : (
-                        <p>LOADING...</p>
+                        <p className="loading-text">LOADING...</p>
                     )}
                 </div>
             </div>

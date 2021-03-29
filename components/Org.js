@@ -8,7 +8,10 @@ const Org = ({ org }) => {
 
     useEffect(() => {
         if (isEmpty(user)) return
-        else setButtonText(user.following.includes(org._id) ? 'Following' : 'Follow')
+        else
+            setButtonText(
+                user.following.includes(org._id) ? 'Following' : 'Follow'
+            )
     }, [user])
 
     //follow org
