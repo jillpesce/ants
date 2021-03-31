@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { groupBy, toPairs, maxBy, minBy } from 'lodash'
 import moment from 'moment'
-import Header from '../components/Header'
+import Header from '../../components/Header'
 import {
     XYPlot,
     XAxis,

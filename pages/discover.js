@@ -38,7 +38,10 @@ export default function Discover() {
                 }
             })
 
-        fetch('https://ants-senior-design.herokuapp.com/orgs/recommended/' + user._id)
+        fetch(
+            'https://ants-senior-design.herokuapp.com/orgs/recommended/' +
+                user._id
+        )
             .then((resp) => resp.json())
             .then(({ err, orgs }) => {
                 if (err) console.log('Error getting recent orgs', err)
