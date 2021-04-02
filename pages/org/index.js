@@ -68,7 +68,6 @@ export default function Home() {
                             setCreate(false)
                             fetchPosts()
                         }}
-                        edit={false}
                     />
                 ) : (
                     <>

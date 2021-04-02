@@ -42,6 +42,26 @@ export default function PostPage() {
         if (!user) window.location.assign('/login')
     })
 
+    function fetchPost() {
+        if (!router.query.id) return
+        fetch(
+            `https://ants-senior-design.herokuapp.com/posts/post/${router.query.id}`,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        )
+            .then((resp) => resp.json())
+            .then(({ post }) => {
+                setPost(post)
+            })
+            .catch((err) => {
+                console.log('Error getting post', err)
+            })
+    }
+
     function likePost() {
         if (!user) {
             setErr('Only users can like posts')
@@ -177,9 +197,9 @@ export default function PostPage() {
                             <CreatePost
                                 orgid={user._id}
                                 close={() => {
-                                setUpdate(false)}}
+                                setUpdate(false)
+                                fetchPost()}}
                                 postValues = {post}
-                                edit = {true}
                     /> : 
                             <button
                                 className="button yellow"

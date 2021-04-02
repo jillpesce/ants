@@ -4,7 +4,7 @@ import typeList from '../constants/types'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
-export default function CreatePost({ orgid, close, postValues, edit }) {
+export default function CreatePost({ orgid, close, postValues }) {
     const [title, setTitle] = useState(postValues ? postValues.title : '')
     const [description, setDescription] = useState(postValues ? postValues.description : '')
     const [location, setLocation] = useState(postValues ? postValues.location : '')
@@ -17,7 +17,7 @@ export default function CreatePost({ orgid, close, postValues, edit }) {
     const [allDay, setAllDay] = useState(postValues ? postValues.allDay : '')
     const [err, setErr] = useState()
     const [success, setSuccess] = useState()
-    const buttonText = edit === true ? 'Update' : 'Post';
+    const buttonText = postValues ? 'Update' : 'Post';
 
     function post(e) {
         e.preventDefault()
@@ -242,7 +242,7 @@ export default function CreatePost({ orgid, close, postValues, edit }) {
                 <button className="button" onClick={close}>
                     Cancel
                 </button>
-                <button className="button purple" onClick={(e) => edit === true ? edit(e) : post(e)}>
+                <button className="button purple" onClick={(e) => postValues ? edit(e) : post(e)}>
                     {buttonText}
                 </button>
             </div>
