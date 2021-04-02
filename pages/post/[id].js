@@ -6,11 +6,14 @@ import Post from '../../components/Post'
 import Header from '../../components/Header'
 import { useRouter } from 'next/router'
 import moment from 'moment'
+import CreatePost from '../../components/CreatePost'
+
 
 export default function PostPage() {
     const { user, userType, updateUser, logout } = useContext(UserContext)
     const [post, setPost] = useState()
     const [err, setErr] = useState()
+    const [update, setUpdate] = useState()
     const router = useRouter()
 
     //get post content
@@ -38,6 +41,26 @@ export default function PostPage() {
     useEffect(() => {
         if (!user) window.location.assign('/login')
     })
+
+    function fetchPost() {
+        if (!router.query.id) return
+        fetch(
+            `https://ants-senior-design.herokuapp.com/posts/post/${router.query.id}`,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        )
+            .then((resp) => resp.json())
+            .then(({ post }) => {
+                setPost(post)
+            })
+            .catch((err) => {
+                console.log('Error getting post', err)
+            })
+    }
 
     function likePost() {
         if (!user) {
@@ -168,6 +191,24 @@ export default function PostPage() {
                             </button>
                         </div>
                     )}
+                    {
+                        userType !== 'user' && 
+                            (update ? 
+                            <CreatePost
+                                orgid={user._id}
+                                close={() => {
+                                setUpdate(false)
+                                fetchPost()}}
+                                postValues = {post}
+                    /> : 
+                            <button
+                                className="button yellow"
+                                onClick={() => setUpdate(true)}
+                            >
+                                Edit
+                            </button> )
+                    }
+
                     <b>{post.likes.length || 0} Likes</b>
                 </div>
             </div>

@@ -136,6 +136,7 @@ const Post = ({
                             </button>
                         </div>
                     )}
+
                     {userType === 'org' && (
                         <div className="is-flex justify-content-flex-end">
                             <button
