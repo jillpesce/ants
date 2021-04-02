@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../../contexts/user-context'
 import isEmpty from 'lodash/isEmpty'

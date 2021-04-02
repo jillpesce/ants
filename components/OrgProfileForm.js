@@ -13,7 +13,6 @@ export default function OrgProfileForm({ onSubmit }) {
 
     useEffect(() => {
         if (!user) return
-        console.log('here')
         setLink(user.link)
         setDescription(user.description)
     }, [user])

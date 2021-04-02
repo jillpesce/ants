@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { UserContext } from '../contexts/user-context'
 
 export default function Header(props) {
-    const { userType, logout } = useContext(UserContext)
+    const { user, userType, logout } = useContext(UserContext)
     return (
         <div className="header">
             <a className="ants" href="/">
@@ -12,6 +12,9 @@ export default function Header(props) {
                 <a href="/">Home</a>
                 {userType == 'user' && <a href="/search">Search</a>}
                 {userType == 'user' && <a href="/discover">Discover</a>}
+                {userType == 'org' && (
+                    <a href={`/analytics/${user._id}`}>Analytics</a>
+                )}
                 <a href="/profile">Profile</a>
                 <a href="/resources">Resources</a>
                 <a href="/about">About</a>

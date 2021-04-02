@@ -167,6 +167,7 @@
 .card-scroll-container {
     display: flex;
     overflow: scroll;
+    align-items: flex-start;
 }
 
 .loading {

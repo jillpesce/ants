@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { groupBy, toPairs, maxBy, minBy } from 'lodash'
 import moment from 'moment'
-import Header from '../components/Header'
+import Header from '../../components/Header'
 import {
     XYPlot,
     XAxis,
@@ -24,7 +24,6 @@ export default function Analytics() {
         fetch('https://ants-senior-design.herokuapp.com/analytics')
             .then((resp) => resp.json())
             .then((analytics) => {
-                console.log(analytics)
                 setTypes(groupBy(analytics, 'action'))
             })
     }, [auth])
