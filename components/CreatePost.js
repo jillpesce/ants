@@ -29,7 +29,7 @@ export default function CreatePost({ orgid, close }) {
         } else if (!type) {
             setErr('Please select an event type')
         } else {
-            fetch('http://localhost:5000/orgs/post', {
+            fetch('https://ants-senior-design.herokuapp.com/orgs/post', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
