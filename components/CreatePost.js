@@ -6,18 +6,26 @@ import 'react-datepicker/dist/react-datepicker.css'
 
 export default function CreatePost({ orgid, close, postValues }) {
     const [title, setTitle] = useState(postValues ? postValues.title : '')
-    const [description, setDescription] = useState(postValues ? postValues.description : '')
-    const [location, setLocation] = useState(postValues ? postValues.location : '')
+    const [description, setDescription] = useState(
+        postValues ? postValues.description : ''
+    )
+    const [location, setLocation] = useState(
+        postValues ? postValues.location : ''
+    )
     const [type, setType] = useState(postValues ? postValues.type : '')
-    const [information, setInformation] = useState(postValues ? postValues.information : '')
-    const [volunteerInformation, setVolunteerInformation] = useState(postValues ? postValues.volunteerInformation : '')
+    const [information, setInformation] = useState(
+        postValues ? postValues.information : ''
+    )
+    const [volunteerInformation, setVolunteerInformation] = useState(
+        postValues ? postValues.volunteerInformation : ''
+    )
     const [link, setLink] = useState(postValues ? postValues.link : '')
     const [startDate, setStartDate] = useState()
     const [endDate, setEndDate] = useState()
     const [allDay, setAllDay] = useState(postValues ? postValues.allDay : '')
     const [err, setErr] = useState()
     const [success, setSuccess] = useState()
-    const buttonText = postValues ? 'Update' : 'Post';
+    const buttonText = postValues ? 'Update' : 'Post'
 
     function post(e) {
         e.preventDefault()
@@ -166,7 +174,11 @@ export default function CreatePost({ orgid, close, postValues }) {
                     <DatePicker
                         showTimeSelect
                         selected={startDate}
-                        defaultValue={postValues ? postValues.startDate : new Date().getDate}
+                        defaultValue={
+                            postValues
+                                ? postValues.startDate
+                                : new Date().getDate
+                        }
                         onChange={(date) => setStartDate(date)}
                     />
                 </div>
@@ -175,7 +187,9 @@ export default function CreatePost({ orgid, close, postValues }) {
                     <DatePicker
                         showTimeSelect
                         selected={endDate}
-                        defaultValue={postValues ? postValues.endDate : new Date().getDate}
+                        defaultValue={
+                            postValues ? postValues.endDate : new Date().getDate
+                        }
                         onChange={(date) => setEndDate(date)}
                     />
                 </div>
@@ -222,7 +236,9 @@ export default function CreatePost({ orgid, close, postValues }) {
                 <label className="label">Volunteer Information</label>
                 <textarea
                     className="textarea"
-                    defaultValue={postValues ? postValues.volunteerInformation : ''}
+                    defaultValue={
+                        postValues ? postValues.volunteerInformation : ''
+                    }
                     onChange={(e) => setVolunteerInformation(e.target.value)}
                     placeholder="Use this section to specify the number of volunteers you need or any special skills needed for the event. This will be visible on the event page."
                 />
@@ -242,7 +258,10 @@ export default function CreatePost({ orgid, close, postValues }) {
                 <button className="button" onClick={close}>
                     Cancel
                 </button>
-                <button className="button purple" onClick={(e) => postValues ? edit(e) : post(e)}>
+                <button
+                    className="button purple"
+                    onClick={(e) => (postValues ? edit(e) : post(e))}
+                >
                     {buttonText}
                 </button>
             </div>

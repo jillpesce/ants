@@ -32,7 +32,7 @@ export default function Discover() {
         fetch('https://ants-senior-design.herokuapp.com/orgs/trending')
             .then((resp) => resp.json())
             .then(({ err, orgs }) => {
-                if (err) console.log('Error getting recent orgs', err)
+                if (err) console.log('Error getting trending orgs', err)
                 else {
                     setTrending(orgs)
                 }

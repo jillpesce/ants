@@ -8,7 +8,6 @@ import { useRouter } from 'next/router'
 import moment from 'moment'
 import CreatePost from '../../components/CreatePost'
 
-
 export default function PostPage() {
     const { user, userType, updateUser, logout } = useContext(UserContext)
     const [post, setPost] = useState()
@@ -191,23 +190,24 @@ export default function PostPage() {
                             </button>
                         </div>
                     )}
-                    {
-                        userType !== 'user' && 
-                            (update ? 
+                    {userType !== 'user' &&
+                        (update ? (
                             <CreatePost
                                 orgid={user._id}
                                 close={() => {
-                                setUpdate(false)
-                                fetchPost()}}
-                                postValues = {post}
-                    /> : 
+                                    setUpdate(false)
+                                    fetchPost()
+                                }}
+                                postValues={post}
+                            />
+                        ) : (
                             <button
                                 className="button yellow"
                                 onClick={() => setUpdate(true)}
                             >
                                 Edit
-                            </button> )
-                    }
+                            </button>
+                        ))}
 
                     <b>{post.likes.length || 0} Likes</b>
                 </div>
